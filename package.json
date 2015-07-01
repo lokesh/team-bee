@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "ejs": "^2.3.2",
     "express": "^4.13.0"
   }
 }
