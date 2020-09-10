@@ -1,16 +1,7 @@
-// --------------
-// Imports
-// --------------
-
-// Import built-in modules
-
-var path = require('path');
-
-// Import NPM modules
-
-var bodyParser = require('body-parser');
-var ejs = require('ejs');
-var express = require('express');
+const path = require('path');
+const ejs = require('ejs');
+const express = require('express');
+const bodyParser = require('body-parser');
 
 // --------------
 // Init and configure app
@@ -41,8 +32,15 @@ app.use(bodyParser.urlencoded({ extended: true})); // For parsing application/x-
 // Routing
 // --------------
 
-var todosRouter = require('./todos');
-app.use(todosRouter);
-// app.use('/api', require('api'));
+const router = require('./router');
+const api = require('./api');
 
-app.listen(3000);
+app.use('/api', api);
+app.use('/', router);
+
+const port = process.env.PORT || 3000
+
+app.listen(port, () => {
+	console.log(`Listening on port ${port}...`)
+});
+
