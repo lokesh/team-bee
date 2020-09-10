@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/lokesh/learning-express.svg?branch=master)](https://travis-ci.com/lokesh/learning-express)
+
 ## 🌍 Overview
 
 An project to learn how to construct an **Express API** with **PostgresSQL**. There will be no client-side code in this repo.
@@ -61,12 +63,10 @@ $ npx express-generator your-project-name --no-view
 ### Testing
 
 ```
-npm i --save-dev mocha chai nyc sinon-chai supertest coveralls
+npm i --save-dev mocha chai sinon-chai supertest
 ```
 
 - `mocha`: Test runner. Looks for /test folder by default.
 - `chai`: Assertion library
-- `nyc`: Test coverage reporter
 - `sinon-chai`: Extends Chai's assertion library
 - `supertest`: Makes HTTP calls to our API endpoints
-- `coveralls`: For uploading test data to coveralls.io

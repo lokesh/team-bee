@@ -8,10 +8,6 @@ logs
 # Build files
 build
 
-# Testing data
-coverage
-.nyc_output
-
 # Dependency directory
 node_modules
 
