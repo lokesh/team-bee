@@ -12,6 +12,7 @@ I'm following a [tutorial on Smashing Magazine](https://www.smashingmagazine.com
 - `npm run lint`: Runs eslint
 - `npm run lintfix`: Runs eslint with `--fix` flag
 - `npm run pretty`: Runs prettier
+- `npm run test`: Run tests with mocha and reporting with nyc
 
 ## 👷‍♀️ Architecture
 
@@ -56,3 +57,16 @@ $ express
 // Or even better
 $ npx express-generator your-project-name --no-view
 ```
+
+### Testing
+
+```
+npm i --save-dev mocha chai nyc sinon-chai supertest coveralls
+```
+
+- `mocha`: Test runner. Looks for /test folder by default.
+- `chai`: Assertion library
+- `nyc`: Test coverage reporter
+- `sinon-chai`: Extends Chai's assertion library
+- `supertest`: Makes HTTP calls to our API endpoints
+- `coveralls`: For uploading test data to coveralls.io
