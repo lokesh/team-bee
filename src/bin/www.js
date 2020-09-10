@@ -4,14 +4,14 @@ import http from 'http';
 import app from '../app';
 
 // Set Port
-const port = (process.env.PORT || '3000');
+const port = process.env.PORT || '3000';
 app.set('port', port);
 
 // Create HTTP server
 const server = http.createServer(app);
 
 // Handle server errors
-const onError = error => {
+const onError = (error) => {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -31,7 +31,7 @@ const onError = error => {
   }
 };
 
-// Log port 
+// Log port
 const onListening = () => {
   const addr = server.address();
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;

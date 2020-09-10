@@ -5,7 +5,10 @@
   "scripts": {
     "prestart": "babel ./src --out-dir build",
     "start": "node ./build/bin/www",
-    "startdev": "nodemon --exec babel-node ./src/bin/www"
+    "startdev": "nodemon --exec babel-node ./src/bin/www",
+    "lint": "./node_modules/.bin/eslint ./src",
+    "lintfix": "./node_modules/.bin/eslint ./src --fix",
+    "pretty": "prettier --write '**/*.{js,json}' '!node_modules/**'"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -22,6 +25,10 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/register": "^7.11.5",
     "@babel/runtime": "^7.11.2",
-    "nodemon": "^2.0.4"
+    "eslint": "^7.8.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.1.1"
   }
 }

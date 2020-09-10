@@ -6,11 +6,22 @@ I'm following a [tutorial on Smashing Magazine](https://www.smashingmagazine.com
 
 ## 🐰 Quick reference
 
-- `npm run prestart`: Build /src, output in /build
-- `npm run start`: Start server from /build
-- `npm run startdev`: Start server in dev mode
+- `npm run prestart`: Build /src, output in /build.
+- `npm run start`: Start server from /build. Services like Heroku will auto run this script on deploy.
+- `npm run startdev`: Start server in dev mode.
+- `npm run lint`: Runs eslint
+- `npm run lintfix`: Runs eslint with `--fix` flag
+- `npm run pretty`: Runs prettier
 
 ## 👷‍♀️ Architecture
+
+### Code style
+
+Enforced with eslint and prettier. Configured in `.eslintrc.json`. (Note: a value of [0] in the config turns off a rule)
+
+```
+npm i --save-dev eslint eslint-config-airbnb-base eslint-plugin-import prettier
+```
 
 ### Node
 
