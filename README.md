@@ -15,13 +15,15 @@ I'm following the excellent [tutorial on Smashing Magazine](https://www.smashing
 
 ## 👷‍♀️ Architecture
 
-### Code style
 
-Enforced with **eslint** and **prettier**. Configured in `.eslintrc.json`. (Note: a value of [0] in the config turns off a rule)
+### Database
 
+Using a Postgres DB hosted by [ElephantSQL](https://www.elephantsql.com/). We connect to with with from Node using the [node-postgres](https://node-postgres.com/) lib. 
+
+```bash
+$ npm i --save pg
 ```
-npm i --save-dev eslint eslint-config-airbnb-base eslint-plugin-import prettier
-```
+
 
 ### Node
 
@@ -48,11 +50,20 @@ Uses **[EJS](https://ejs.co/)**.
 
 ### Testing
 
-```
-npm i --save-dev mocha chai sinon-chai supertest
+```bash
+$ npm i --save-dev mocha chai sinon-chai supertest
 ```
 
 - `mocha`: Test runner. Looks for /test folder by default.
 - `chai`: Assertion library
 - `sinon-chai`: Extends Chai's assertion library
 - `supertest`: Makes HTTP calls to our API endpoints
+
+
+### Code style
+
+Enforced with **eslint** and **prettier**. Configured in `.eslintrc.json`. (Note: a value of [0] in the config turns off a rule)
+
+```bash
+$ npm i --save-dev eslint eslint-config-airbnb-base eslint-plugin-import prettier
+```
