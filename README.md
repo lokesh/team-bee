@@ -20,7 +20,7 @@ I'm following the excellent [tutorial on Smashing Magazine](https://www.smashing
 
 Using a Postgres DB hosted by [ElephantSQL](https://www.elephantsql.com/). We connect to with with from Node using the [node-postgres](https://node-postgres.com/) lib. 
 
-```bash
+```sh
 $ npm i --save pg
 ```
 
