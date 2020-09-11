@@ -1,10 +1,8 @@
-[![Build Status](https://travis-ci.com/lokesh/learning-express.svg?branch=master)](https://travis-ci.com/lokesh/learning-express)
-
 ## 🌍 Overview
 
 An project to learn how to construct an **Express API** with **PostgresSQL**. There will be no client-side code in this repo.
 
-I'm following a [tutorial on Smashing Magazine](https://www.smashingmagazine.com/2020/04/express-api-backend-project-postgresql/) by Chidi Orji.
+I'm following the excellent [tutorial on Smashing Magazine](https://www.smashingmagazine.com/2020/04/express-api-backend-project-postgresql/) by Chidi Orji.
 
 ## 🐰 Quick reference
 
@@ -47,17 +45,6 @@ Uses **[EJS](https://ejs.co/)**.
 <% if (user) { %>
   <h2><%= user.name %></h2>
 <% } %>
-```
-
-### File structure
-
-Project structure set up by **express generator**.
-```
-$ npm i express-generator
-$ express
-
-// Or even better
-$ npx express-generator your-project-name --no-view
 ```
 
 ### Testing
