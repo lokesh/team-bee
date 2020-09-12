@@ -1,8 +1,9 @@
 import express from 'express';
-import { indexPage, messagesPage } from '../controllers';
+import { indexPage, listMessages, createMessage } from '../controllers';
 
 const indexRouter = express.Router();
 indexRouter.get('/', indexPage);
-indexRouter.get('/messages', messagesPage);
+indexRouter.get('/messages', listMessages);
+indexRouter.post('/messages', createMessage);
 
 export default indexRouter;
