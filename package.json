@@ -6,6 +6,7 @@
     "build": "babel ./src --out-dir build",
     "start": "node ./build/bin/www",
     "dev": "nodemon --exec babel-node ./src/bin/www",
+    "reset-db": "babel-node ./src/utils/runQuery",
     "lint": "./node_modules/.bin/eslint ./src",
     "lintfix": "./node_modules/.bin/eslint ./src --fix",
     "pretty": "prettier --write '**/*.{js,json}' '!node_modules/**'",

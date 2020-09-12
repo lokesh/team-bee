@@ -13,6 +13,14 @@ I'm following the excellent [tutorial on Smashing Magazine](https://www.smashing
 - `npm run pretty`: Runs prettier
 - `npm run test`: Run tests with mocha and reporting with nyc
 
+## 👨‍💻 Local development
+
+```bash
+$cp .env.example .env
+```
+
+Populate CONNECTION_STRING. In my case, I grabbed the DB connection string from ElephantSQL.
+
 ## 👷‍♀️ Architecture
 
 
@@ -20,10 +28,23 @@ I'm following the excellent [tutorial on Smashing Magazine](https://www.smashing
 
 Using a Postgres DB hosted by [ElephantSQL](https://www.elephantsql.com/). We connect to with with from Node using the [node-postgres](https://node-postgres.com/) lib. 
 
-```sh
+```bash
 $ npm i --save pg
 ```
 
+#### Pooling
+
+In node-postgres, every query is executed by a client. _Connection pooling_ is a pattern of creating a pool of available connections and allowing multiple clients to share these connections.
+
+This is useful when you have limited connections and lots of clients.
+
+`models/pool.js` export a pool which we import when we want to access the db. 
+
+```
+import { pool } from './pool';
+
+pool.query(...)
+```
 
 ### Node
 
@@ -54,11 +75,12 @@ Uses **[EJS](https://ejs.co/)**.
 $ npm i --save-dev mocha chai sinon-chai supertest
 ```
 
-- `mocha`: Test runner. Looks for /test folder by default.
+- `mocha`: Test runner
 - `chai`: Assertion library
 - `sinon-chai`: Extends Chai's assertion library
 - `supertest`: Makes HTTP calls to our API endpoints
 
+Mocha looks for a `/test` folder by default. In there, if `hooks.js` exists, it will automatically run lifecycle methods specified in there.
 
 ### Code style
 
