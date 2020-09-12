@@ -3,8 +3,9 @@ A project to learn how to construct an **Express API** that uses **PostgresSQL**
 
 I'm following the excellent [tutorial on Smashing Magazine](https://www.smashingmagazine.com/2020/04/express-api-backend-project-postgresql/) by Chidi Orji.
 
-## 🐰 Quick reference
+## 👨‍💻 Local development
 
+### Quick reference
 - `npm run build`: Build /src, output in /build.
 - `npm run start`: Start server from /build. Services like Heroku will auto run this script on deploy.
 - `npm run dev`: Start server in dev mode.
@@ -13,7 +14,7 @@ I'm following the excellent [tutorial on Smashing Magazine](https://www.smashing
 - `npm run pretty`: Runs prettier
 - `npm run test`: Run tests with mocha and reporting with nyc
 
-## 👨‍💻 Local development
+### 🔌 Set up
 
 ```bash
 $cp .env.example .env
@@ -21,8 +22,16 @@ $cp .env.example .env
 
 Populate CONNECTION_STRING. In my case, I grabbed the DB connection string from ElephantSQL.
 
-## 👷‍♀️ Architecture
+## 🚀 Deploy
 
+The project is hosted on Heroku.
+
+### Quick reference
+
+- `heroku logs --tail`: Real-time server logs
+
+
+## 👷‍♀️ Architecture
 
 ### Database
 
