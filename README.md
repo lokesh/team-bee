@@ -28,6 +28,9 @@ The project is hosted on Heroku.
 
 ### Quick reference
 
+- `git push heroku`: Deploy
+- `heroku open`: Opens in browser
+- `heroku run npm run TASK_NAME`: Run npm tasks on server
 - `heroku logs --tail`: Real-time server logs
 
 

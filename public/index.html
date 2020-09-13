@@ -1,0 +1,16 @@
+<html>
+<body>
+
+WELCOME!
+
+<script>
+
+(async () => {
+  const resp = await fetch('v1/messages');
+  const data = await resp.json();
+  console.log(data)  ;
+})();
+</script>
+
+</body>
+</html>
