@@ -55,6 +55,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": ".editorconfig",
+			"settings":
+			{
+				"buffer_size": 130,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -136,10 +144,21 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/lokesh/Projects/learning-express"
+		"/Users/lokesh/Projects/learning-express",
+		"/Users/lokesh/Projects/learning-express/src",
+		"/Users/lokesh/Projects/learning-express/src/bin",
+		"/Users/lokesh/Projects/learning-express/src/controllers",
+		"/Users/lokesh/Projects/learning-express/src/middleware",
+		"/Users/lokesh/Projects/learning-express/src/models",
+		"/Users/lokesh/Projects/learning-express/src/routes",
+		"/Users/lokesh/Projects/learning-express/src/utils"
 	],
 	"file_history":
 	[
+		"/Users/lokesh/Projects/learning-express/.editorconfig",
+		"/Users/lokesh/Projects/learning-express/src/app.js",
+		"/Users/lokesh/Projects/learning-express/src/routes/index.js",
+		"/Users/lokesh/Projects/learning-express/README.md",
 		"/Users/lokesh/Projects/hive-words/node_modules/utils-merge/index.js",
 		"/Users/lokesh/Projects/hive-words/src/utils/index.js",
 		"/Users/lokesh/Projects/hive-words/src/store/index.js",
@@ -263,11 +282,7 @@
 		"/Users/lokesh/Projects/colortron/Swatch.vue",
 		"/Users/lokesh/Projects/lokesh-dhakar/src/notes.md",
 		"/Users/lokesh/Projects/lokesh-dhakar/src/css/main.css",
-		"/Users/lokesh/Projects/lokesh-dhakar/src/notes/primary.md",
-		"/Users/lokesh/Projects/lokesh-dhakar/src/notes/american-factory.md",
-		"/Users/lokesh/Projects/lokesh-dhakar/src/notes/digital-gold.md",
-		"/Users/lokesh/Projects/lokesh-dhakar/src/layouts/page.njk",
-		"/Users/lokesh/Projects/lokesh-dhakar/dist/css/main.css"
+		"/Users/lokesh/Projects/lokesh-dhakar/src/notes/primary.md"
 	],
 	"find":
 	{
@@ -302,8 +317,42 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": ".editorconfig",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 130,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								130
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/EditorConfig/EditorConfig.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -356,6 +405,10 @@
 		"selected_items":
 		[
 			[
+				"readme",
+				"README.md"
+			],
+			[
 				"base.",
 				"src/styles/base.css"
 			],
@@ -370,10 +423,6 @@
 			[
 				"store index",
 				"src/store/index.js"
-			],
-			[
-				"readme",
-				"README.md"
 			],
 			[
 				"base",
@@ -895,7 +944,7 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 249.0,
 	"status_bar_visible": true,
 	"template_settings":

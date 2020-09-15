@@ -44,6 +44,8 @@ Using a Postgres DB hosted by [ElephantSQL](https://www.elephantsql.com/). We co
 $ npm i --save pg
 ```
 
+Usig [TablePlus](https://tableplus.com/) as a GUI has been great for building tables and seeding data.
+
 #### Pooling
 
 In node-postgres, every query is executed by a client. _Connection pooling_ is a pattern of creating a pool of available connections and allowing multiple clients to share these connections.
