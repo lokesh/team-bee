@@ -56,34 +56,30 @@
 	"buffers":
 	[
 		{
-			"file": "src/controllers/index.js",
+			"file": "src/controllers/progress.js",
 			"settings":
 			{
-				"buffer_size": 78,
+				"buffer_size": 1193,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/controllers/users.js",
+			"file": "src/models/model.js",
 			"settings":
 			{
-				"buffer_size": 749,
+				"buffer_size": 834,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/controllers/messages.js",
+			"contents": "import debug from 'debug';\nimport Model from '../models/model';\nconst model = new Model('puzzles');\n\n// GET /puzzles\nexport const listPuzzles = async (req, res) => {\n  try {\n    const data = await model.select('id, name, config');\n    res.status(200).json({ data: data.rows});\n  } catch (err) {\n    res.status(400).json({ data:err.stack });\n  }\n}\n\n// POST /puzzles\nexport const createPuzzle = async (req, res) => {  \n  const columns = ['name', 'config'].join(',');\n  const { name, config } = req.body;\n  const values = `'${name}', '${config}'`;\n  try {    \n    const data = await model.create(columns, values);\n    res.status(200).json({ data: data.rows});\n  } catch (err) {\n    res.status(400).json({ data:err.stack });\n  }\n}\n\n// GET /puzzles/:id\nexport const showPuzzle = async (req, res) => {  \n  const id = parseInt(req.params.id);\n  try {\n    const data = await model.select('id, name, config', `WHERE id = ${id}`);\n    if (data.rows.length) {\n      res.status(200).json(data.rows[0]);  \n    } else {\n      res.statusMessage = `Puzzle with id of ${id} not found`;\n      res.status(404).end();  \n    }\n  } catch (err) {\n    res.status(400).json({ data:err.stack });\n  }\n}\n\n\n// GET /puzzles/id/progress\n",
+			"file": "src/controllers/puzzles.js",
+			"file_size": 1207,
+			"file_write_time": 132451339804149129,
 			"settings":
 			{
-				"buffer_size": 747,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/routes/index.js",
-			"settings":
-			{
-				"buffer_size": 414,
+				"buffer_size": 1206,
 				"line_ending": "Unix"
 			}
 		}
@@ -175,23 +171,30 @@
 		"/Users/lokesh/Projects/learning-express/src/middleware",
 		"/Users/lokesh/Projects/learning-express/src/models",
 		"/Users/lokesh/Projects/learning-express/src/routes",
-		"/Users/lokesh/Projects/learning-express/src/utils"
+		"/Users/lokesh/Projects/learning-express/src/utils",
+		"/Users/lokesh/Projects/learning-express/test"
 	],
 	"file_history":
 	[
-		"/Users/lokesh/Projects/learning-express/src/models/model.js",
-		"/Users/lokesh/Projects/learning-express/README.md",
-		"/Users/lokesh/Projects/learning-express/src/controllers/users.js",
-		"/Users/lokesh/Projects/learning-express/src/controllers/messages.js",
 		"/Users/lokesh/Projects/learning-express/src/controllers/index.js",
-		"/Users/lokesh/Projects/learning-express/src/app.js",
 		"/Users/lokesh/Projects/learning-express/src/routes/index.js",
+		"/Users/lokesh/Projects/learning-express/src/controllers/users.js",
+		"/Users/lokesh/Projects/learning-express/src/models/model.js",
+		"/Users/lokesh/Projects/learning-express/src/controllers/progress.js",
+		"/Users/lokesh/Projects/learning-express/src/app.js",
+		"/Users/lokesh/Projects/learning-express/src/controllers/puzzles.js",
+		"/Users/lokesh/Projects/learning-express/package.json",
+		"/Users/lokesh/Projects/learning-express/test/index.test.js",
+		"/Users/lokesh/Projects/learning-express/test/messages.test.js",
+		"/Users/lokesh/Projects/learning-express/.env",
+		"/Users/lokesh/Projects/learning-express/src/controllers/messages.js",
+		"/Users/lokesh/Projects/learning-express/src/controllers/home.js",
 		"/Users/lokesh/Projects/learning-express/src/bin/www.js",
+		"/Users/lokesh/Projects/learning-express/src/middleware/index.js",
+		"/Users/lokesh/Projects/learning-express/README.md",
 		"/Users/lokesh/Projects/learning-express/src/utils/queries.js",
 		"/Users/lokesh/Projects/learning-express/src/utils/queryFunctions.js",
-		"/Users/lokesh/Projects/learning-express/package.json",
 		"/Users/lokesh/Projects/learning-express/src/utils/runQuery.js",
-		"/Users/lokesh/Projects/learning-express/.env",
 		"/Users/lokesh/Projects/learning-express/.gitignore",
 		"/Users/lokesh/Projects/learning-express/.editorconfig",
 		"/Users/lokesh/Projects/hive-words/node_modules/utils-merge/index.js",
@@ -300,23 +303,20 @@
 		"/Users/lokesh/Projects/colortron/src/components/Swatch.vue",
 		"/Users/lokesh/Projects/colortron/src/styles/base.css",
 		"/Users/lokesh/Projects/colortron/src/store.js",
-		"/Users/lokesh/Projects/colortron/src/components/Slider.vue",
-		"/Users/lokesh/Projects/colortron/src/components/Stepper.vue",
-		"/Users/lokesh/Library/Application Support/Sublime Text 3/Packages/JsPrettier/JsPrettier.sublime-settings",
-		"/Users/lokesh/Projects/colortron/package.json",
-		"/Users/lokesh/Projects/colortron/package-lock.json",
-		"/Users/lokesh/Projects/colortron/babel.config.js",
-		"/Users/lokesh/Projects/colortron/src/styles/vue-slider-component.css"
+		"/Users/lokesh/Projects/colortron/src/components/Slider.vue"
 	],
 	"find":
 	{
-		"height": 43.0
+		"height": 40.0
 	},
 	"find_in_files":
 	{
 		"height": 102.0,
 		"where_history":
 		[
+			"*, -node_modules/*, -build",
+			"*, -node_modules, -build",
+			""
 		]
 	},
 	"find_state":
@@ -324,6 +324,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"listpuzz",
+			"listpuzzle",
+			"www.js",
+			"debug(",
+			"debug",
+			"log(",
+			"select(",
+			"column",
+			"columns"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -341,24 +350,24 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/controllers/index.js",
+					"file": "src/controllers/progress.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 78,
+						"buffer_size": 1193,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								282,
+								282
 							]
 						],
 						"settings":
@@ -374,16 +383,16 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/controllers/users.js",
+					"file": "src/models/model.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 749,
+						"buffer_size": 834,
 						"regions":
 						{
 						},
@@ -409,22 +418,28 @@
 					},
 					"stack_index": 2,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
 				{
 					"buffer": 2,
-					"file": "src/controllers/messages.js",
+					"file": "src/controllers/puzzles.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 747,
+						"buffer_size": 1206,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								724,
+								417
 							]
 						],
 						"settings":
@@ -442,46 +457,13 @@
 					},
 					"stack_index": 1,
 					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/routes/index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 414,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								385,
-								385
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
 				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 31.0
+		"height": 28.0
 	},
 	"input":
 	{
@@ -496,11 +478,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.486050498753,
 			1.0
 		],
 		"rows":
@@ -518,7 +507,7 @@
 	"project": "learning-express.sublime-project",
 	"replace":
 	{
-		"height": 58.0
+		"height": 52.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -527,6 +516,34 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"model.s",
+				"src/models/model.js"
+			],
+			[
+				"puzzles",
+				"src/controllers/puzzles.js"
+			],
+			[
+				"users.js",
+				"src/controllers/users.js"
+			],
+			[
+				"package.",
+				"package.json"
+			],
+			[
+				"model",
+				"src/models/model.js"
+			],
+			[
+				"packa",
+				"package.json"
+			],
+			[
+				"package.js",
+				"package.json"
+			],
 			[
 				"readm",
 				"README.md"
@@ -614,10 +631,6 @@
 			[
 				"hivecell",
 				"src/components/HiveCell.vue"
-			],
-			[
-				"packa",
-				"package.json"
 			],
 			[
 				"toggle",
@@ -840,10 +853,6 @@
 				"src/views/ColorStacks.vue"
 			],
 			[
-				"package.",
-				"package.json"
-			],
-			[
 				"sectionc",
 				"src/views/SectionColor.vue"
 			],
@@ -1018,26 +1027,6 @@
 			[
 				"grayssta",
 				"src/views/GraysStack.vue"
-			],
-			[
-				"sectiongray",
-				"src/views/SectionGrays.vue"
-			],
-			[
-				"modalex",
-				"src/components/ModalExport.vue"
-			],
-			[
-				"stackbloc",
-				"src/components/Stack/StackBlock.vue"
-			],
-			[
-				"graysta",
-				"src/components/GraysStack.vue"
-			],
-			[
-				"vue slide css",
-				"src/styles/vue-slider-component.css"
 			]
 		],
 		"width": 0.0
@@ -1068,7 +1057,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 348.0,
+	"side_bar_width": 316.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

@@ -2,25 +2,28 @@ import Model from '../models/model';
 
 const model = new Model('users');
 
+// GET /users
 export const listUsers = async (req, res) => {
   try {
-    const data = await model.select('id, name');
+    const data = await model.select('*');
     res.status(200).json({ rows: data.rows});
   } catch (err) {
     res.status(200).json({ rows: err.stack });
    }
 }
 
-// export const createMessage = async (req, res) => {  
-//   const columns = ['name', 'message'];
-//   const columnsStr = columns.join(',');
-//   const { name, message } = req.body;
-//   const values = `'${name}', '${message}'`;
-//   try {    
-//     const data = await messagesModel.create(columnsStr, values);
-//     res.status(200).json({ messages: data.rows});
-//   } catch (err) {
-//     res.status(200).json({ messages:err.stack });
-//    }
-// }
-
+// GET /users/:id
+export const showUser = async (req, res) => {
+  const id = parseInt(req.params.id);
+  try {
+    const data = await model.select('*', `WHERE id = ${id}`);
+   if (data.rows.length) {
+      res.status(200).json(data.rows[0]);  
+    } else {
+      res.statusMessage = `User with id of ${id} not found`;
+      res.status(404).end();  
+    }
+  } catch (err) {
+    res.status(200).json({ rows: err.stack });
+   }
+}
