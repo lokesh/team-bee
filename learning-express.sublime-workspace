@@ -56,10 +56,34 @@
 	"buffers":
 	[
 		{
-			"file": ".editorconfig",
+			"file": "src/controllers/index.js",
 			"settings":
 			{
-				"buffer_size": 130,
+				"buffer_size": 78,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/controllers/users.js",
+			"settings":
+			{
+				"buffer_size": 749,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/controllers/messages.js",
+			"settings":
+			{
+				"buffer_size": 747,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/routes/index.js",
+			"settings":
+			{
+				"buffer_size": 414,
 				"line_ending": "Unix"
 			}
 		}
@@ -155,10 +179,21 @@
 	],
 	"file_history":
 	[
-		"/Users/lokesh/Projects/learning-express/.editorconfig",
+		"/Users/lokesh/Projects/learning-express/src/models/model.js",
+		"/Users/lokesh/Projects/learning-express/README.md",
+		"/Users/lokesh/Projects/learning-express/src/controllers/users.js",
+		"/Users/lokesh/Projects/learning-express/src/controllers/messages.js",
+		"/Users/lokesh/Projects/learning-express/src/controllers/index.js",
 		"/Users/lokesh/Projects/learning-express/src/app.js",
 		"/Users/lokesh/Projects/learning-express/src/routes/index.js",
-		"/Users/lokesh/Projects/learning-express/README.md",
+		"/Users/lokesh/Projects/learning-express/src/bin/www.js",
+		"/Users/lokesh/Projects/learning-express/src/utils/queries.js",
+		"/Users/lokesh/Projects/learning-express/src/utils/queryFunctions.js",
+		"/Users/lokesh/Projects/learning-express/package.json",
+		"/Users/lokesh/Projects/learning-express/src/utils/runQuery.js",
+		"/Users/lokesh/Projects/learning-express/.env",
+		"/Users/lokesh/Projects/learning-express/.gitignore",
+		"/Users/lokesh/Projects/learning-express/.editorconfig",
 		"/Users/lokesh/Projects/hive-words/node_modules/utils-merge/index.js",
 		"/Users/lokesh/Projects/hive-words/src/utils/index.js",
 		"/Users/lokesh/Projects/hive-words/src/store/index.js",
@@ -271,22 +306,11 @@
 		"/Users/lokesh/Projects/colortron/package.json",
 		"/Users/lokesh/Projects/colortron/package-lock.json",
 		"/Users/lokesh/Projects/colortron/babel.config.js",
-		"/Users/lokesh/Projects/colortron/src/styles/vue-slider-component.css",
-		"/Users/lokesh/Projects/colortron/node_modules/vue-slider-component/theme/default.css",
-		"/Users/lokesh/Projects/colortron/src/assets/x.svg",
-		"/Users/lokesh/Projects/colortron/public/index.html",
-		"/Users/lokesh/Projects/colortron/src/components/PaletteSimple.vue",
-		"/Users/lokesh/Projects/colortron/PaletteSimple.vue",
-		"/Users/lokesh/Projects/colortron/Palette.vue",
-		"/Users/lokesh/Projects/colortron/SwatchSimple.vue",
-		"/Users/lokesh/Projects/colortron/Swatch.vue",
-		"/Users/lokesh/Projects/lokesh-dhakar/src/notes.md",
-		"/Users/lokesh/Projects/lokesh-dhakar/src/css/main.css",
-		"/Users/lokesh/Projects/lokesh-dhakar/src/notes/primary.md"
+		"/Users/lokesh/Projects/colortron/src/styles/vue-slider-component.css"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 43.0
 	},
 	"find_in_files":
 	{
@@ -317,16 +341,16 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": ".editorconfig",
-					"semi_transient": true,
+					"file": "src/controllers/index.js",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 130,
+						"buffer_size": 78,
 						"regions":
 						{
 						},
@@ -334,14 +358,113 @@
 						[
 							[
 								0,
-								130
+								0
 							]
 						],
 						"settings":
 						{
 							"editorconfig": true,
 							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/EditorConfig/EditorConfig.sublime-syntax",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/controllers/users.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 749,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/controllers/messages.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 747,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/routes/index.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 414,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								385,
+								385
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true,
 							"trim_trailing_white_space_on_save": false
@@ -358,7 +481,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 27.0
+		"height": 31.0
 	},
 	"input":
 	{
@@ -395,7 +518,7 @@
 	"project": "learning-express.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 58.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -404,6 +527,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"readm",
+				"README.md"
+			],
 			[
 				"readme",
 				"README.md"
@@ -911,10 +1038,6 @@
 			[
 				"vue slide css",
 				"src/styles/vue-slider-component.css"
-			],
-			[
-				"eslintrc",
-				"node_modules/babel-plugin-dynamic-import-node/.eslintrc"
 			]
 		],
 		"width": 0.0
@@ -945,7 +1068,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 249.0,
+	"side_bar_width": 348.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
