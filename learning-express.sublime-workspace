@@ -56,30 +56,20 @@
 	"buffers":
 	[
 		{
-			"file": "src/controllers/progress.js",
+			"file": "src/controllers/puzzles.js",
 			"settings":
 			{
-				"buffer_size": 1193,
+				"buffer_size": 1189,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/models/model.js",
+			"file": "src/routes/index.js",
 			"settings":
 			{
-				"buffer_size": 834,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "import debug from 'debug';\nimport Model from '../models/model';\nconst model = new Model('puzzles');\n\n// GET /puzzles\nexport const listPuzzles = async (req, res) => {\n  try {\n    const data = await model.select('id, name, config');\n    res.status(200).json({ data: data.rows});\n  } catch (err) {\n    res.status(400).json({ data:err.stack });\n  }\n}\n\n// POST /puzzles\nexport const createPuzzle = async (req, res) => {  \n  const columns = ['name', 'config'].join(',');\n  const { name, config } = req.body;\n  const values = `'${name}', '${config}'`;\n  try {    \n    const data = await model.create(columns, values);\n    res.status(200).json({ data: data.rows});\n  } catch (err) {\n    res.status(400).json({ data:err.stack });\n  }\n}\n\n// GET /puzzles/:id\nexport const showPuzzle = async (req, res) => {  \n  const id = parseInt(req.params.id);\n  try {\n    const data = await model.select('id, name, config', `WHERE id = ${id}`);\n    if (data.rows.length) {\n      res.status(200).json(data.rows[0]);  \n    } else {\n      res.statusMessage = `Puzzle with id of ${id} not found`;\n      res.status(404).end();  \n    }\n  } catch (err) {\n    res.status(400).json({ data:err.stack });\n  }\n}\n\n\n// GET /puzzles/id/progress\n",
-			"file": "src/controllers/puzzles.js",
-			"file_size": 1207,
-			"file_write_time": 132451339804149129,
-			"settings":
-			{
-				"buffer_size": 1206,
+				"buffer_size": 765,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		}
@@ -95,6 +85,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"color",
+				"UI: Select Color Scheme"
+			],
 			[
 				"instal",
 				"Package Control: Install Package"
@@ -176,11 +170,12 @@
 	],
 	"file_history":
 	[
+		"/Users/lokesh/Projects/learning-express/src/controllers/users.js",
+		"/Users/lokesh/Projects/learning-express/src/controllers/progress.js",
+		"/Users/lokesh/Projects/learning-express/src/models/model.js",
+		"/Users/lokesh/Projects/learning-express/.gitignore",
 		"/Users/lokesh/Projects/learning-express/src/controllers/index.js",
 		"/Users/lokesh/Projects/learning-express/src/routes/index.js",
-		"/Users/lokesh/Projects/learning-express/src/controllers/users.js",
-		"/Users/lokesh/Projects/learning-express/src/models/model.js",
-		"/Users/lokesh/Projects/learning-express/src/controllers/progress.js",
 		"/Users/lokesh/Projects/learning-express/src/app.js",
 		"/Users/lokesh/Projects/learning-express/src/controllers/puzzles.js",
 		"/Users/lokesh/Projects/learning-express/package.json",
@@ -195,7 +190,6 @@
 		"/Users/lokesh/Projects/learning-express/src/utils/queries.js",
 		"/Users/lokesh/Projects/learning-express/src/utils/queryFunctions.js",
 		"/Users/lokesh/Projects/learning-express/src/utils/runQuery.js",
-		"/Users/lokesh/Projects/learning-express/.gitignore",
 		"/Users/lokesh/Projects/learning-express/.editorconfig",
 		"/Users/lokesh/Projects/hive-words/node_modules/utils-merge/index.js",
 		"/Users/lokesh/Projects/hive-words/src/utils/index.js",
@@ -355,19 +349,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "src/controllers/progress.js",
+					"file": "src/controllers/puzzles.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1193,
+						"buffer_size": 1189,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								282,
-								282
+								455,
+								455
 							]
 						],
 						"settings":
@@ -388,58 +382,19 @@
 				},
 				{
 					"buffer": 1,
-					"file": "src/models/model.js",
+					"file": "src/routes/index.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 834,
+						"buffer_size": 765,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 2,
-					"file": "src/controllers/puzzles.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1206,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								724,
-								417
+								261,
+								261
 							]
 						],
 						"settings":
@@ -463,7 +418,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 28.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -478,18 +433,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.486050498753,
 			1.0
 		],
 		"rows":
@@ -507,7 +455,7 @@
 	"project": "learning-express.sublime-project",
 	"replace":
 	{
-		"height": 52.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -516,6 +464,18 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"users.",
+				"src/controllers/users.js"
+			],
+			[
+				"routes inde",
+				"src/routes/index.js"
+			],
+			[
+				"progress.js",
+				"src/controllers/progress.js"
+			],
 			[
 				"model.s",
 				"src/models/model.js"
@@ -1015,18 +975,6 @@
 			[
 				"modal.v",
 				"src/components/Modal/Modal.vue"
-			],
-			[
-				"modalba",
-				"src/components/Modal/ModalBackdrop.vue"
-			],
-			[
-				"color stacks",
-				"src/views/ColorStacks.vue"
-			],
-			[
-				"grayssta",
-				"src/views/GraysStack.vue"
 			]
 		],
 		"width": 0.0
@@ -1056,7 +1004,7 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 316.0,
 	"status_bar_visible": true,
 	"template_settings":

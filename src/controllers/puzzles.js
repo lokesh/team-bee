@@ -6,7 +6,7 @@ const model = new Model('puzzles');
 export const listPuzzles = async (req, res) => {
   try {
     const data = await model.select('id, name, config');
-    res.status(200).json({ data: data.rows});
+    res.status(200).json(data.rows);
   } catch (err) {
     res.status(400).json({ data:err.stack });
   }
@@ -19,10 +19,10 @@ export const createPuzzle = async (req, res) => {
   const values = `'${name}', '${config}'`;
   try {    
     const data = await model.create(columns, values);
-    res.status(200).json({ data: data.rows});
+    res.status(200).json(data.rows);
   } catch (err) {
-    res.status(400).json({ data:err.stack });
-   }
+    res.status(400).json({ data: err.stack });
+  }
 }
 
 // GET /puzzles/:id

@@ -6,9 +6,9 @@ const model = new Model('users');
 export const listUsers = async (req, res) => {
   try {
     const data = await model.select('*');
-    res.status(200).json({ rows: data.rows});
+    res.status(200).json(data.rows);
   } catch (err) {
-    res.status(200).json({ rows: err.stack });
+    res.status(200).json(err.stack);
    }
 }
 

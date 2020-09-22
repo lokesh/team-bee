@@ -1,13 +1,15 @@
 import express from 'express';
 import {
-  createPuzzle,
   indexPage,
-  listPuzzles,
   listUsers,
-  showPuzzle,
   showUser,
+  listPuzzles,
+  createPuzzle,
+  showPuzzle,
+  listUsersProgress,
   showUserProgress,
-  // updateUserProgress,
+  createUserProgress,
+  updateUserProgress,
 } from '../controllers';
 // import { modifyMessage } from '../middleware';
 
@@ -17,14 +19,13 @@ indexRouter.get('/', indexPage);
 indexRouter.get('/users', listUsers);
 indexRouter.get('/users/:id', showUser);
 
-indexRouter.get('/users/:id/puzzles/:puzzleId', showUserProgress);
-// indexRouter.put('/users/:id/puzzles/:puzzleId', updateUserProgress);
-
 indexRouter.get('/puzzles', listPuzzles);
 indexRouter.post('/puzzles', createPuzzle);
 indexRouter.get('/puzzles/:id', showPuzzle);
 
-// indexRouter.get('/messages', listMessages);
-// indexRouter.post('/messages', modifyMessage, createMessage);
+indexRouter.get('/puzzles/:id/users', listUsersProgress);
+indexRouter.get('/puzzles/:puzzleId/users/:userId', showUserProgress);
+indexRouter.post('/puzzles/:puzzleId/users/:userId', createUserProgress);
+indexRouter.put('/puzzles/:puzzleId/users/:userId', updateUserProgress);
 
 export default indexRouter;
