@@ -46,7 +46,14 @@ $ npm i --save pg
 
 Usig [TablePlus](https://tableplus.com/) as a GUI has been great for building tables and seeding data.
 
-#### Pooling
+
+#### Postgres
+
+- Limit complex objects in a column of type JSON. When fetching on the client, which properties are set will be unknown.
+- Use snake_casing. Postgres is picky about capital letters.
+- When using arrays, be aware that depending on the type, the return format can be different. Eg. Using [char], returns {a,b,c}, with the curly braces included.
+
+##### Pooling
 
 In node-postgres, every query is executed by a client. _Connection pooling_ is a pattern of creating a pool of available connections and allowing multiple clients to share these connections.
 
@@ -59,6 +66,8 @@ import { pool } from './pool';
 
 pool.query(...)
 ```
+
+
 
 ### Node
 
