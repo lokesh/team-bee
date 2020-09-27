@@ -23,9 +23,9 @@ indexRouter.get('/puzzles', listPuzzles);
 indexRouter.post('/puzzles', createPuzzle);
 indexRouter.get('/puzzles/:id', showPuzzle);
 
-indexRouter.get('/puzzles/:id/users', listUsersProgress);
-indexRouter.get('/puzzles/:puzzleId/users/:userId', showUserProgress);
-indexRouter.post('/puzzles/:puzzleId/users/:userId', createUserProgress);
-indexRouter.put('/puzzles/:puzzleId/users/:userId', updateUserProgress);
+indexRouter.get('/puzzles/:puzzle_id/users', listUsersProgress);
+indexRouter.get('/puzzles/:puzzle_id/users/:user_id', showUserProgress);
+indexRouter.post('/puzzles/:puzzle_id/users/:user_id', createUserProgress);
+indexRouter.put('/puzzles/:puzzle_id/users/:user_id', updateUserProgress);
 
 export default indexRouter;

@@ -17,8 +17,6 @@ export const createPuzzle = async (req, res) => {
   const columns = ['name', 'center_letter', 'outer_letters', 'answers'].join(',');
   const { name, centerLetter, outerLetters, answers } = req.body;
   const values = `'${name}', '${centerLetter}', '{${outerLetters}}', '{${answers}}'`;
-  console.log(columns);
-  console.log(values);
   
   try {    
     const data = await model.create(columns, values);
