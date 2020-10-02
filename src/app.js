@@ -6,7 +6,9 @@ import indexRouter from './routes/index';
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: 'https://lokeshdhakar.com',
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
