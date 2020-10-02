@@ -1,4 +1,4 @@
-## 🐝 Team Bee API
+# 🐝 Team Bee API
 
 A Node Express API server hosted on Heroku that powers the Team Bee game.
 
