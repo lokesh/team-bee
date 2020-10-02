@@ -38,13 +38,13 @@ The project is hosted on Heroku.
 
 ### Database
 
-Using a Postgres DB hosted by [ElephantSQL](https://www.elephantsql.com/). We connect to with with from Node using the [node-postgres](https://node-postgres.com/) lib. 
+Using a Postgres DB hosted by [ElephantSQL](https://www.elephantsql.com/). We connect to with with from Node using the [node-postgres](https://node-postgres.com/) lib. It's barebones and I would use something that provided a bigger abstraction next time.
 
 ```bash
 $ npm i --save pg
 ```
 
-Usig [TablePlus](https://tableplus.com/) as a GUI has been great for building tables and seeding data.
+Using [TablePlus](https://tableplus.com/) as a GUI has been great for building tables and seeding data.
 
 
 #### Postgres
