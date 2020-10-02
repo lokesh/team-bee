@@ -1,4 +1,4 @@
-## 🌍 Overview
+## 🐝 Team Bee API
 A project to learn how to construct an **Express API** that uses **PostgresSQL**. 
 
 I'm following the excellent [tutorial on Smashing Magazine](https://www.smashingmagazine.com/2020/04/express-api-backend-project-postgresql/) by Chidi Orji.
