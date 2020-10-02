@@ -6,7 +6,7 @@ I'm following the excellent [tutorial on Smashing Magazine](https://www.smashing
 ## 👨‍💻 Local development
 
 ### Quick reference
-- `npm run build`: Build /src, output in /build.
+- `npm run prestart`: Build /src, output in /build.
 - `npm run start`: Start server from /build. Services like Heroku will auto run this script on deploy.
 - `npm run dev`: Start server in dev mode.
 - `npm run lint`: Runs eslint

@@ -56,20 +56,19 @@
 	"buffers":
 	[
 		{
-			"file": "src/controllers/puzzles.js",
+			"file": "src/controllers/progress.js",
 			"settings":
 			{
-				"buffer_size": 1189,
+				"buffer_size": 2552,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/routes/index.js",
+			"file": "src/controllers/users.js",
 			"settings":
 			{
-				"buffer_size": 765,
-				"encoding": "UTF-8",
+				"buffer_size": 710,
 				"line_ending": "Unix"
 			}
 		}
@@ -170,23 +169,26 @@
 	],
 	"file_history":
 	[
-		"/Users/lokesh/Projects/learning-express/src/controllers/users.js",
-		"/Users/lokesh/Projects/learning-express/src/controllers/progress.js",
+		"/Users/lokesh/Projects/learning-express/build/bin/www.js",
+		"/Users/lokesh/Projects/learning-express/public/index.html",
+		"/Users/lokesh/Projects/learning-express/src/routes/index.js",
 		"/Users/lokesh/Projects/learning-express/src/models/model.js",
+		"/Users/lokesh/Projects/learning-express/src/controllers/puzzles.js",
+		"/Users/lokesh/Projects/learning-express/src/controllers/progress.js",
+		"/Users/lokesh/Projects/learning-express/package.json",
+		"/Users/lokesh/Projects/learning-express/src/controllers/home.js",
+		"/Users/lokesh/Projects/learning-express/README.md",
+		"/Users/lokesh/Projects/learning-express/.eslintrc.json",
+		"/Users/lokesh/Projects/learning-express/src/controllers/users.js",
 		"/Users/lokesh/Projects/learning-express/.gitignore",
 		"/Users/lokesh/Projects/learning-express/src/controllers/index.js",
-		"/Users/lokesh/Projects/learning-express/src/routes/index.js",
 		"/Users/lokesh/Projects/learning-express/src/app.js",
-		"/Users/lokesh/Projects/learning-express/src/controllers/puzzles.js",
-		"/Users/lokesh/Projects/learning-express/package.json",
 		"/Users/lokesh/Projects/learning-express/test/index.test.js",
 		"/Users/lokesh/Projects/learning-express/test/messages.test.js",
 		"/Users/lokesh/Projects/learning-express/.env",
 		"/Users/lokesh/Projects/learning-express/src/controllers/messages.js",
-		"/Users/lokesh/Projects/learning-express/src/controllers/home.js",
 		"/Users/lokesh/Projects/learning-express/src/bin/www.js",
 		"/Users/lokesh/Projects/learning-express/src/middleware/index.js",
-		"/Users/lokesh/Projects/learning-express/README.md",
 		"/Users/lokesh/Projects/learning-express/src/utils/queries.js",
 		"/Users/lokesh/Projects/learning-express/src/utils/queryFunctions.js",
 		"/Users/lokesh/Projects/learning-express/src/utils/runQuery.js",
@@ -294,10 +296,7 @@
 		"/Users/lokesh/Library/Application Support/Sublime Text 3/Packages/User/JsPrettier.sublime-settings",
 		"/Users/lokesh/Projects/colortron/src/utils.js",
 		"/Users/lokesh/Projects/colortron/src/components/SwatchSimple.vue",
-		"/Users/lokesh/Projects/colortron/src/components/Swatch.vue",
-		"/Users/lokesh/Projects/colortron/src/styles/base.css",
-		"/Users/lokesh/Projects/colortron/src/store.js",
-		"/Users/lokesh/Projects/colortron/src/components/Slider.vue"
+		"/Users/lokesh/Projects/colortron/src/components/Swatch.vue"
 	],
 	"find":
 	{
@@ -318,6 +317,19 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"throw",
+			"console.log(",
+			"progress",
+			"userId",
+			"puzzleId",
+			"puzzleid",
+			"lint",
+			"puzzleId",
+			"puzzleid",
+			"values = ",
+			"JSON.",
+			"JSON",
+			"JSON.st",
 			"listpuzz",
 			"listpuzzle",
 			"www.js",
@@ -334,6 +346,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"user_id",
+			"puzzle_id"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -344,24 +358,57 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/controllers/puzzles.js",
+					"file": "src/controllers/progress.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1189,
+						"buffer_size": 2552,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								455,
-								455
+								2122,
+								2122
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 455.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/controllers/users.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 710,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -378,39 +425,6 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/routes/index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 765,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								261,
-								261
-							]
-						],
-						"settings":
-						{
-							"editorconfig": true,
-							"ensure_newline_at_eof_on_save": true,
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true,
-							"trim_trailing_white_space_on_save": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -455,7 +469,7 @@
 	"project": "learning-express.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 71.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -464,6 +478,46 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"user",
+				"src/controllers/users.js"
+			],
+			[
+				"progress",
+				"src/controllers/progress.js"
+			],
+			[
+				"package",
+				"package.json"
+			],
+			[
+				"model",
+				"src/models/model.js"
+			],
+			[
+				"routes",
+				"src/routes/index.js"
+			],
+			[
+				"eslintrc",
+				".eslintrc.json"
+			],
+			[
+				"readme",
+				"README.md"
+			],
+			[
+				"readm",
+				"README.md"
+			],
+			[
+				"models",
+				"src/models/model.js"
+			],
+			[
+				"progress.",
+				"src/controllers/progress.js"
+			],
 			[
 				"users.",
 				"src/controllers/users.js"
@@ -493,24 +547,12 @@
 				"package.json"
 			],
 			[
-				"model",
-				"src/models/model.js"
-			],
-			[
 				"packa",
 				"package.json"
 			],
 			[
 				"package.js",
 				"package.json"
-			],
-			[
-				"readm",
-				"README.md"
-			],
-			[
-				"readme",
-				"README.md"
 			],
 			[
 				"base.",
@@ -619,10 +661,6 @@
 			[
 				"menub",
 				"src/views/MenuBar.vue"
-			],
-			[
-				"package",
-				"package.json"
 			],
 			[
 				"modal.",
@@ -951,30 +989,6 @@
 			[
 				"spectr",
 				"src/components/Spectrum/SpectrumHandle.vue"
-			],
-			[
-				"spectrum han",
-				"src/components/Spectrum/SpectrumHandle.vue"
-			],
-			[
-				"vue slider c",
-				"src/styles/vue-slider-component.css"
-			],
-			[
-				"store.s",
-				"src/store.js"
-			],
-			[
-				"varia",
-				"node_modules/cross-env/src/variable.js"
-			],
-			[
-				"var.",
-				"node_modules/css-tree/lib/syntax/function/var.js"
-			],
-			[
-				"modal.v",
-				"src/components/Modal/Modal.vue"
 			]
 		],
 		"width": 0.0
@@ -1005,7 +1019,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": false,
-	"side_bar_width": 316.0,
+	"side_bar_width": 256.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
