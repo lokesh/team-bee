@@ -1,7 +1,8 @@
 ## 🐝 Team Bee API
-A project to learn how to construct an **Express API** that uses **PostgresSQL**. 
 
-I'm following the excellent [tutorial on Smashing Magazine](https://www.smashingmagazine.com/2020/04/express-api-backend-project-postgresql/) by Chidi Orji.
+A Node Express API server hosted on Heroku that powers the Team Bee game.
+
+The bulk of the decisions around this repo's architecture were made following the excellent [tutorial on Smashing Magazine](https://www.smashingmagazine.com/2020/04/express-api-backend-project-postgresql/) by Chidi Orji.
 
 ## 👨‍💻 Local development
 
@@ -66,8 +67,6 @@ import { pool } from './pool';
 
 pool.query(...)
 ```
-
-
 
 ### Node
 
