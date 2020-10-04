@@ -6,6 +6,7 @@ import {
   listPuzzles,
   createPuzzle,
   showPuzzle,
+  deletePuzzle,
   listUsersProgress,
   showUserProgress,
   createUserProgress,
@@ -22,6 +23,7 @@ indexRouter.get('/users/:id', showUser);
 indexRouter.get('/puzzles', listPuzzles);
 indexRouter.post('/puzzles', createPuzzle);
 indexRouter.get('/puzzles/:id', showPuzzle);
+indexRouter.delete('/puzzles/:id', deletePuzzle);
 
 indexRouter.get('/puzzles/:puzzle_id/users', listUsersProgress);
 indexRouter.get('/puzzles/:puzzle_id/users/:user_id', showUserProgress);

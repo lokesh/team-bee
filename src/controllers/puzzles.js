@@ -5,8 +5,12 @@ const model = new Model('puzzles');
 
 // GET /puzzles
 export const listPuzzles = async (req, res) => {
+  const {order_by, dir, hide_future} = req.query;
+  let sort = (order_by && dir) ? `ORDER BY ${order_by} ${dir}` : '';
+  let clause = (hide_future) ? 'WHERE "date" <= CURRENT_DATE' : '';
+
   try {
-    const data = await model.select('*', 'WHERE "date" <= CURRENT_DATE');
+    const data = await model.select('*', clause, sort);
     res.status(200).json(data.rows);
   } catch (err) {
     res.status(400).json({ data: err.stack });
@@ -15,11 +19,12 @@ export const listPuzzles = async (req, res) => {
 
 // POST /puzzles
 export const createPuzzle = async (req, res) => {
-  const columns = [ 'name', 'center_letter', 'outer_letters', 'answers' ].join(',');
+  const columns = ['date', 'center_letter', 'outer_letters', 'answers' ].join(',');
   const {
-    name, centerLetter, outerLetters, answers
+    date, center_letter, outer_letters, answers
   } = req.body;
-  const values = `'${name}', '${centerLetter}', '{${outerLetters}}', '{${answers}}'`;
+
+  const values = `'${date}', '${center_letter}', '${outer_letters}', '${answers}'`;
 
   try {
     const data = await model.create(columns, values);
@@ -45,4 +50,18 @@ export const showPuzzle = async (req, res) => {
   }
 };
 
-// GET /puzzles/id/progress
+// DELETE /puzzles/:id
+export const deletePuzzle = async (req, res) => {
+  const id = parseInt(req.params.id);
+  try {
+    const data = await model.delete(`WHERE "id" = '${id}'`);
+     if (data.rows.length) {
+      res.status(200).json(data.rows[0]);
+    } else {
+      res.statusMessage = `Puzzle with id of ${id} was not deleted. Does it exist?`;
+      res.status(404).end();
+    }
+  } catch (err) {
+    res.status(400).json({ data: err.stack });
+  }
+};

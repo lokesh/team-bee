@@ -4,6 +4,21 @@ A Node Express API server hosted on Heroku that powers the Team Bee game.
 
 The bulk of the decisions around this repo's architecture were made following the excellent [tutorial on Smashing Magazine](https://www.smashingmagazine.com/2020/04/express-api-backend-project-postgresql/) by Chidi Orji.
 
+## 🛣 Routes
+
+```
+GET    /users
+GET    /users/:id
+GET    /puzzles?order_by=date&dir=desc&hide_future=true
+POST   /puzzles
+GET    /puzzles/:id
+DELETE /puzzles/:id
+GET    /puzzles/:id/users
+GET    /puzzles/:id/users/:userId
+POST   /puzzles/:id/users/:userId
+PUT    /puzzles/:id/users/:userId
+```
+
 ## 👨‍💻 Local development
 
 ### Quick reference
@@ -14,6 +29,8 @@ The bulk of the decisions around this repo's architecture were made following th
 - `npm run lintfix`: Runs eslint with `--fix` flag
 - `npm run pretty`: Runs prettier
 - `npm run test`: Run tests with mocha and reporting with nyc
+
+
 
 ### 🔌 Set up
 

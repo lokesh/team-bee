@@ -13,8 +13,25 @@ class Model {
           VALUES (${values})
           RETURNING *
       `;
+    console.log('query', query);
     return this.pool.query(query);
   }
+
+  // DELETE FROM "puzzles" WHERE "id" = '22'
+  async delete(clause) {
+    if (!clause) {
+      throw new Error('DELETE method requires a clause, e.g. "WHERE id = 2"');
+    }
+
+    const query = `
+          DELETE FROM ${this.table} 
+          ${clause}
+          RETURNING *
+      `;
+    console.log('query', query);
+    return this.pool.query(query);
+  }
+
 
   async update(columns, values, clause) {
     let setQuery = '';
@@ -30,9 +47,10 @@ class Model {
     return this.pool.query(query, values);
   }
 
-  async select(columns, clause) {
-    let query = `SELECT ${columns} FROM ${this.table} `;
-    if (clause) query += clause;
+  async select(columns, clause, sort) {
+    let query = `SELECT ${columns} FROM ${this.table}`;
+    if (clause) query += ' ' + clause;
+    if (sort) query += ' ' + sort;
     return this.pool.query(query);
   }
 }
