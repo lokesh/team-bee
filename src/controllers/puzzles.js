@@ -6,7 +6,7 @@ const model = new Model('puzzles');
 // GET /puzzles
 export const listPuzzles = async (req, res) => {
   try {
-    const data = await model.select('*');
+    const data = await model.select('*', 'WHERE "date" <= CURRENT_DATE');
     res.status(200).json(data.rows);
   } catch (err) {
     res.status(400).json({ data: err.stack });
