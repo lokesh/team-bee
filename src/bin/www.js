@@ -19,21 +19,16 @@ io.on('connection', socket => {
   // socket.broadcast.emit() send to all but originator
   // io.emit()               send to all
 
-  socket.emit('message', 'Welcome to chat!');
-
-  socket.broadcast.emit('message', 'A user joined the chat');
+  // On any new connection
+  // socket.broadcast.emit('message', 'A user joined the chat');
 
   socket.on('message', (data) => {
     socket.broadcast.emit('message', `User ${data} has joined!`);
   })
 
-  socket.on('disconnect', () => {
-    io.emit('message', 'A user has left the chat');
-  })
-
-  socket.on('move', () => {
-    io.emit('position', 'position');
-  })
+  // socket.on('disconnect', () => {
+  //   io.emit('message', 'A user has left the chat');
+  // })
 })
 
 
