@@ -24,8 +24,8 @@ export const createPuzzle = async (req, res) => {
     date, center_letter, outer_letters, answers
   } = req.body;
 
-  const values = `'${date}', '${center_letter}', '${outer_letters}', '${answers}'`;
-
+  const values = `'${date}', '${center_letter}', '{${outer_letters}}', '{${answers}}'`;
+  console.log(values);
   try {
     const data = await model.create(columns, values);
     res.status(200).json(data.rows);
