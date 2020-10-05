@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import debug from 'debug';
 import http from 'http';
+import socketio from 'socket.io';
 import app from '../app';
 
 // Set Port
@@ -9,6 +10,32 @@ app.set('port', port);
 
 // Create HTTP server
 const server = http.createServer(app);
+
+// Create socket.io server
+const io = socketio(server);
+
+io.on('connection', socket => {
+  // socket.emit()           send to single client
+  // socket.broadcast.emit() send to all but originator
+  // io.emit()               send to all
+
+  socket.emit('message', 'Welcome to chat!');
+
+  socket.broadcast.emit('message', 'A user joined the chat');
+
+  socket.on('message', (data) => {
+    socket.broadcast.emit('message', `User ${data} has joined!`);
+  })
+
+  socket.on('disconnect', () => {
+    io.emit('message', 'A user has left the chat');
+  })
+
+  socket.on('move', () => {
+    io.emit('position', 'position');
+  })
+})
+
 
 // Handle server errors
 const onError = (error) => {
