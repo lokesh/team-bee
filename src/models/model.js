@@ -13,7 +13,6 @@ class Model {
           VALUES (${values})
           RETURNING *
       `;
-    console.log('query', query);
     return this.pool.query(query);
   }
 
@@ -28,7 +27,6 @@ class Model {
           ${clause}
           RETURNING *
       `;
-    console.log('query', query);
     return this.pool.query(query);
   }
 
