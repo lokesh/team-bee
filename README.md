@@ -101,8 +101,7 @@ Try Firebase?
 
 _Scratchpad_
 
-It took a couple tries, but I'm happy with the db schema and the Vuex store organization. Write down some of the issues I ran into in the two prev iterations.
-
+It took a couple tries, but I'm happy with the db schema and the Vuex store organization.
 
 1. Prefer initializing your store's initial state with all desired fields upfront.
 2. When adding new properties to an Object, you should either:
