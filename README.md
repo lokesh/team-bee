@@ -43,10 +43,13 @@ Then populate the env vars:
 2. ALLOWED_ORIGINS: For local testing, you can use localhost or *
 
 
-
 ## 🚀 Deploy
 
 The project is hosted on Heroku.
+
+1. Install heroku CLI
+2. Add remote: `heroku git:remote -a "team-bee-api"`
+
 
 ### Quick reference
 
