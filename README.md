@@ -38,7 +38,11 @@ PUT    /puzzles/:id/users/:userId
 $cp .env.example .env
 ```
 
-Populate CONNECTION_STRING. In my case, I grabbed the DB connection string from ElephantSQL.
+Then populate the env vars:
+1. CONNECTION_STRING: Grab the DB connection string from ElephantSQL
+2. ALLOWED_ORIGINS: For local testing, you can use localhost or *
+
+
 
 ## 🚀 Deploy
 
