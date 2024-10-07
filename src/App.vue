@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import io from 'socket.io-client';
 import PageSpinner from '@/components/PageSpinner';
 
 export default {
@@ -17,16 +16,9 @@ export default {
     PageSpinner,
   },
 
-  provide() {
-    return {
-      socket: this.socket,
-    };
-  },
-
   data() {
     return {
       isLoaded: false,
-      socket: io(process.env.VUE_APP_SOCKETIO_SERVER),
     };
   },
 
@@ -45,15 +37,6 @@ export default {
     }
 
     this.isLoaded = true;
-  },
-
-  created() {
-    // console.log(this.socket);
-    if (this.socket) {
-      this.socket.on('message', (data) => {
-        console.log('got a message', data);
-      })
-    }
   },
 }
 </script>

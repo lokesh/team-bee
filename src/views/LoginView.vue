@@ -27,19 +27,12 @@ export default {
     ]),
   },
 
-  inject: ['socket'],
-
   mounted() {
     this.$store.commit('clearUser');
   },
 
   methods: {
     login(id) {
-      /* Testing */
-      if (this.socket) {
-        this.socket.emit('message', id);
-      }
-
       this.$store.commit('setUserId', id);
       this.$router.push('game')
     },

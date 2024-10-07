@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "node ./build/deploy.js"
+    "deploy": "node ./build/deploy.js",
+    "dev": "vue-cli-service serve"
   },
   "dependencies": {
     "axios": "^0.20.0",
@@ -16,7 +17,6 @@
     "lodash.has": "^4.5.2",
     "lodash.shuffle": "^4.2.0",
     "lodash.values": "^4.3.0",
-    "socket.io": "^2.3.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
