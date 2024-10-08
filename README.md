@@ -53,15 +53,6 @@ The project is hosted on Heroku.
 
 ### Quick reference
 
-First time through:
-
-```bash
-heroku login
-heroku git:remote -a team-bee-api
-```
-
-Then:
-
 - `git push heroku`: Deploy
 - `heroku open`: Opens in browser
 - `heroku run npm run TASK_NAME`: Run npm tasks on server
