@@ -31,8 +31,11 @@ const prepStrArray = (arr) => `{${arr.join()}}`;
 
 export default new Vuex.Store({
   state: {
+    showDebugger: false,
+
     users: {},
     puzzles: {},
+    puzzleOrder: [],
     puzzleProgress: {},
     userId: 0,
     puzzleId: 0,
@@ -127,9 +130,15 @@ export default new Vuex.Store({
       return state.puzzles[state.puzzleId] || {};
     },
 
+    puzzleOrderIndex: (state) => {
+      console.log(state.puzzleId);
+      return state.puzzleOrder.indexOf(state.puzzleId);
+    },
+
     newestPuzzle: (state) => {
-      const puzzles = values(state.puzzles);
-      return puzzles[puzzles.length - 1];
+      return state.puzzles[state.puzzleOrder[state.puzzleOrder.length - 1]];
+      // const puzzles = values(state.puzzles);
+      // return puzzles[puzzles.length - 1];
     },
 
     teamMode: (state) => state.puzzleProgress[state.userId].team_mode,
@@ -180,14 +189,16 @@ export default new Vuex.Store({
      * Loads all puzzle data. Used to bootstrap app.
      * @return {Promise}]
      */
-    loadPuzzles: ({ commit }) => {
-      return axios.get('/puzzles?hide_future=true')
+    loadPuzzles: ({ commit, state }) => {
+      return axios.get('/puzzles?hide_future=false&order_by=date&dir=asc')
         .then(res => {
           const puzzles = {};
           res.data.forEach((puzzle) => {
+            state.puzzleOrder.push(puzzle.id);
+
             puzzle.outer_letters = parseCharArray(puzzle.outer_letters);
             puzzles[puzzle.id] = puzzle;
-          })
+          })          
           commit('setPuzzles', puzzles);
         });
     },

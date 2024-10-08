@@ -48,7 +48,6 @@ import PageSpinner from '@/components/PageSpinner.vue'
 import PuzzleSwitcher from '@/components/PuzzleSwitcher.vue'
 import Scoreboard from '@/components/Scoreboard.vue'
 import ScoreboardMini from '@/components/ScoreboardMini.vue'
-
 export default {
   name: 'GameView',
 

@@ -1,7 +1,7 @@
 <template>
   <div class="switcher">
     <button
-      v-visible="puzzleIndex !== 0"
+      v-visible="puzzleOrderIndex !== 0"
       class="nav-button"
       @click="prev"
     >
@@ -14,7 +14,7 @@
       {{ puzzleDate }}
     </div>
     <button
-      v-visible="puzzleIndex !== puzzlesArray.length - 1"
+      v-visible="puzzleOrderIndex !== puzzleOrder.length - 1"
       class="nav-button nav-button-reverse"
       @click="next"
     >
@@ -39,11 +39,13 @@ export default {
   computed: {
     ...mapState([
       'puzzles',
-      'puzzleId'
+      'puzzleId',
+      'puzzleOrder',
     ]),
 
     ...mapGetters([
-      'puzzle'
+      'puzzle',
+      'puzzleOrderIndex',      
     ]),
 
     puzzlesArray() {
@@ -65,10 +67,10 @@ export default {
 
   methods: {
     next() {
-      this.$emit('switch', this.puzzlesArray[this.puzzleIndex + 1]);
+      this.$emit('switch', this.puzzleOrder[this.puzzleOrderIndex + 1]);
     },
     prev() {
-      this.$emit('switch', this.puzzlesArray[this.puzzleIndex - 1]);
+      this.$emit('switch', this.puzzleOrder[this.puzzleOrderIndex - 1]);
     },
   }
 }

@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <debugger v-if="showDebugger" />
     <router-view v-if="isLoaded">
     </router-view>
     <page-spinner v-else />
@@ -8,12 +9,21 @@
 
 <script>
 import PageSpinner from '@/components/PageSpinner';
+import Debugger from '@/components/Debugger';
+import { mapState } from 'vuex';
 
 export default {
   name: 'App',
 
   components: {
     PageSpinner,
+    Debugger,
+  },
+
+  computed: {
+    ...mapState([
+      'showDebugger',
+    ]),
   },
 
   data() {
