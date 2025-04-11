@@ -1,0 +1,2 @@
+export const GENIUS_PERCENTAGE_SOLO = 0.55;
+export const GENIUS_PERCENTAGE_TEAM = 0.75;

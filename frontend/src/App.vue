@@ -1,81 +1,53 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { ref, onBeforeMount } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useUserStore } from './stores/user'
+import { usePuzzleStore } from './stores/puzzle'
+import PageSpinner from '@/components/PageSpinner.vue'
+import Debugger from '@/components/Debugger.vue'
+
+const router = useRouter()
+const route = useRoute()
+const userStore = useUserStore()
+const puzzleStore = usePuzzleStore()
+
+const isLoaded = ref(false)
+const showDebugger = ref(false) // You might want to move this to a separate store
+
+onBeforeMount(async () => {
+  await userStore.loadUsers()
+  await puzzleStore.loadPuzzles()
+
+  // Check if user is already set, then skip login screen
+  const userId = JSON.parse(localStorage.getItem('userId'))
+
+  if (userId) {
+    userStore.setUserId(userId)
+    if (route.name !== 'Game') {
+      router.push({ name: 'Game' })
+    }
+  }
+
+  isLoaded.value = true
+})
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <div class="app">
+    <debugger v-if="showDebugger" />
+    <router-view v-if="isLoaded">
+    </router-view>
+    <page-spinner v-else />
+  </div>
 </template>
 
+<style>
+@import "./styles/base.css";
+</style>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.app {
+  max-width: 1024px;
+  margin: 0 auto;
 }
 </style>
