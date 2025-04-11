@@ -11,11 +11,20 @@ import {
   showUserProgress,
   createUserProgress,
   updateUserProgress,
+  testConnection,
 } from '../controllers/index.js';
 // import { modifyMessage } from '../middleware';
 
 const indexRouter = express.Router();
 indexRouter.get('/', indexPage);
+
+// Test endpoint
+indexRouter.get('/test', (req, res) => {
+  res.json({ message: 'API is working!' });
+});
+
+// Test database connection
+indexRouter.get('/test-connection', testConnection);
 
 indexRouter.get('/users', listUsers);
 indexRouter.get('/users/:id', showUser);

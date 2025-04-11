@@ -4,14 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prestart": "babel ./src --out-dir build",
-    "start": "node ./build/bin/www",
-    "dev": "nodemon --exec babel-node ./src/bin/www",
-    "reset-db": "babel-node ./src/utils/runQuery",
+    "start": "node ./src/bin/www",
+    "dev": "cd ../frontend && npm run build && cd ../backend && nodemon ./src/bin/www",
+    "reset-db": "node ./src/utils/runQuery",
     "lint": "./node_modules/.bin/eslint ./src",
     "lintfix": "./node_modules/.bin/eslint ./src --fix",
     "pretty": "prettier --write '**/*.{js,json}' '!node_modules/**'",
-    "test": "mocha -r @babel/register"
+    "test": "mocha"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -24,13 +23,6 @@
     "pg": "^8.13.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/node": "^7.10.5",
-    "@babel/plugin-transform-runtime": "^7.11.5",
-    "@babel/preset-env": "^7.11.5",
-    "@babel/register": "^7.11.5",
-    "@babel/runtime": "^7.11.2",
     "chai": "^4.2.0",
     "eslint": "^7.8.1",
     "eslint-config-airbnb-base": "^14.2.0",

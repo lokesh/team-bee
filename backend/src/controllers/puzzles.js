@@ -1,7 +1,52 @@
 import debug from 'debug';
 import Model from '../models/model.js';
+import { pool } from '../models/pool.js';
 
 const model = new Model('puzzles');
+
+// Test database connection
+export const testConnection = async (req, res) => {
+  console.log('Test connection request received:', {
+    headers: req.headers,
+    method: req.method,
+    url: req.url,
+    query: req.query
+  });
+
+  try {
+    console.log('Attempting database connection...');
+    console.log('Connection pool options:', pool.options);
+    
+    const result = await pool.query('SELECT NOW()');
+    console.log('Database query successful:', {
+      timestamp: result.rows[0].now,
+      rowCount: result.rowCount
+    });
+
+    res.status(200).json({ 
+      success: true, 
+      timestamp: result.rows[0].now,
+      connectionInfo: pool.options
+    });
+  } catch (err) {
+    console.error('Database connection error:', {
+      message: err.message,
+      stack: err.stack,
+      code: err.code,
+      detail: err.detail,
+      hint: err.hint
+    });
+
+    res.status(400).json({ 
+      success: false, 
+      error: err.message,
+      stack: err.stack,
+      code: err.code,
+      detail: err.detail,
+      hint: err.hint
+    });
+  }
+};
 
 // GET /puzzles
 export const listPuzzles = async (req, res) => {

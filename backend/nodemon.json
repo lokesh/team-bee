@@ -4,7 +4,6 @@
     "nodemon.json",
     ".env",
     ".eslintrc.json",
-    ".babelrc",
     ".prettierrc",
     "src/"
   ],
