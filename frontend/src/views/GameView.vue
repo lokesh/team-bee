@@ -39,8 +39,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { usePuzzleStore } from '@/stores/puzzle'
-import { useUserStore } from '@/stores/user'
+import { useStore } from '@/stores'
 import EventBus from '@/event-bus'
 import Hive from '@/components/Hive.vue'
 import HiveActions from '@/components/HiveActions.vue'
@@ -51,25 +50,24 @@ import PuzzleSwitcher from '@/components/PuzzleSwitcher.vue'
 import Scoreboard from '@/components/Scoreboard.vue'
 import ScoreboardMini from '@/components/ScoreboardMini.vue'
 
-const puzzleStore = usePuzzleStore()
-const userStore = useUserStore()
+const store = useStore()
 
-const userProgressDataLoaded = computed(() => puzzleStore.userProgressDataLoaded)
-const modal = computed(() => puzzleStore.modal)
+const userProgressDataLoaded = computed(() => store.userProgressDataLoaded)
+const modal = computed(() => store.modal)
 
 const onKey = (e) => {
   // Note: Enter key is handled in HiveInput.vue
 
   if (e.keyCode === 8 || e.keyCode === 46) {  // Backspace and Delete
-    puzzleStore.removeInputLetter()
+    store.removeInputLetter()
 
   } else if (e.keyCode > 64 && e.keyCode < 91) { // A-Z
     EventBus.$emit('letterKeyPress', e.key.toLocaleLowerCase())
-    puzzleStore.addInputLetter(e.key)
+    store.addInputLetter(e.key)
 
   } else if (e.keyCode === 32) { // Space
     e.preventDefault() // Don't scroll page down
-    puzzleStore.shuffleOuterLetters()
+    store.shuffleOuterLetters()
 
   } else if (e.keyCode === 27) { // Esc
     router.push({ name: 'Login' })
@@ -77,11 +75,12 @@ const onKey = (e) => {
 }
 
 const switchPuzzle = async (puzzleId) => {
-  await puzzleStore.switchPuzzle(puzzleId)
+  await store.switchPuzzle(puzzleId)
 }
 
 onMounted(() => {
   document.addEventListener('keydown', onKey)
+  store.loadPuzzles()
 })
 
 onUnmounted(() => {
