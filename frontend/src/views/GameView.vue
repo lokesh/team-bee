@@ -55,11 +55,6 @@ const store = useStore()
 const userProgressDataLoaded = computed(() => store.userProgressDataLoaded)
 const modal = computed(() => store.modal)
 
-// Switch to puzzle, either selected or newest
-const puzzleId = store.puzzleId ? store.puzzleId : store.newestPuzzle.id
-await store.switchPuzzle(puzzleId)
-
-
 const onKey = (e) => {
   // Note: Enter key is handled in HiveInput.vue
 
@@ -83,9 +78,12 @@ const switchPuzzle = async (puzzleId) => {
   await store.switchPuzzle(puzzleId)
 }
 
-onMounted(() => {
+onMounted(async () => {
   document.addEventListener('keydown', onKey)
-  store.loadPuzzles()
+  await store.loadPuzzles()
+  // Switch to puzzle, either selected or newest
+  const puzzleId = store.puzzleId ? store.puzzleId : store.newestPuzzle.id
+  await store.switchPuzzle(puzzleId)
 })
 
 onUnmounted(() => {

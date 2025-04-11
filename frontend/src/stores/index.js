@@ -190,11 +190,14 @@ export const useStore = defineStore('main', {
       try {
         const response = await axios.get(`/puzzles/${puzzleId}/users`)
         const progressCollection = {}
-
+        
         response.data.forEach(progress => {
           progressCollection[progress.user_id] = progress
         })
+        
         this.puzzleProgress = progressCollection
+
+        console.log(this.puzzleProgress)
         console.log('Puzzle progress loaded for:', Object.keys(progressCollection).length, 'users')
         console.log(this.puzzleProgress)
         if (!(this.userId in this.puzzleProgress)) {
