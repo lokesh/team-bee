@@ -31,20 +31,20 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { usePuzzleStore } from '@/stores/puzzle'
+import { useStore } from '@/stores'
 import EventBus from '@/event-bus'
 import { calcPoints, isPangram } from '@/utils'
 
-const puzzleStore = usePuzzleStore()
+const store = useStore()
 const notice = ref(null)
 const input = ref(null)
 const isNoticeVisible = ref(false)
 const noticeMsg = ref('')
 
-const inputLetters = computed(() => puzzleStore.inputLetters)
-const puzzle = computed(() => puzzleStore.currentPuzzle)
-const foundWords = computed(() => puzzleStore.foundWords)
-const teamMode = computed(() => puzzleStore.teamMode)
+const inputLetters = computed(() => store.inputLetters)
+const puzzle = computed(() => store.currentPuzzle)
+const foundWords = computed(() => store.foundWords)
+const teamMode = computed(() => store.teamMode)
 
 const centerLetter = computed(() => puzzle.value?.center_letter)
 const outerLetters = computed(() => puzzle.value?.outer_letters)
@@ -66,7 +66,7 @@ const onNoticeEnd = () => {
 
 const onShakeEnd = () => {
   input.value.classList.remove('input--error')
-  puzzleStore.clearInputLetters()
+  store.clearInputLetters()
 }
 
 const shake = () => {
@@ -102,8 +102,8 @@ const submit = () => {
     let str = isPangram(currentInput) ? 'Pangram! ' : ''
     showNotice(`${str} +${points}`)
 
-    puzzleStore.addFoundWord(currentInput)
-    puzzleStore.clearInputLetters()
+    store.addFoundWord(currentInput)
+    store.clearInputLetters()
   }
 }
 

@@ -18,20 +18,20 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/user'
+import { useStore } from '@/stores'
 
 const router = useRouter()
-const userStore = useUserStore()
+const store = useStore()
 
-const users = computed(() => userStore.users)
+const users = computed(() => store.users)
 
 const login = (id) => {
-  userStore.setUserId(id)
+  store.setUserId(id)
   router.push('game')
 }
 
 onMounted(() => {
-  userStore.clearUser()
+  store.clearUser()
 })
 </script>
 

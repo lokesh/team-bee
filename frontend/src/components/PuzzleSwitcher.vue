@@ -68,11 +68,11 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { usePuzzleStore } from '@/stores/puzzle'
+import { useStore } from '@/stores'
 import SegmentedControl from '@/components/SegmentedControl.vue'
 import GeniusBar from '@/components/GeniusBar.vue'
 
-const puzzleStore = usePuzzleStore()
+const store = useStore()
 
 const viewMode = ref('all')
 
@@ -81,9 +81,9 @@ const viewOptions = [
   { label: 'Incomplete', value: 'incomplete' }
 ]
 
-const currentPuzzleId = computed(() => puzzleStore.currentPuzzleId)
+const currentPuzzleId = computed(() => store.currentPuzzleId)
 const sortedPuzzles = computed(() => {
-  return [...puzzleStore.puzzles]
+  return [...store.puzzles]
     .sort((a, b) => a.order - b.order)
 })
 
@@ -92,7 +92,7 @@ const filteredPuzzles = computed(() => {
 })
 
 const selectPuzzle = (puzzleId) => {
-  puzzleStore.setCurrentPuzzle(puzzleId)
+  store.setCurrentPuzzle(puzzleId)
 }
 </script>
 

@@ -31,7 +31,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import { usePuzzleStore } from '@/stores/puzzle'
+import { useStore } from '@/stores'
 import EventBus from '@/event-bus'
 
 const props = defineProps({
@@ -45,7 +45,7 @@ const props = defineProps({
   },
 })
 
-const puzzleStore = usePuzzleStore()
+const store = useStore()
 const isPressed = ref(false)
 
 const onLetterKeyPress = (pressedLetter) => {
@@ -56,7 +56,7 @@ const onLetterKeyPress = (pressedLetter) => {
 
 const onClick = () => {
   isPressed.value = true
-  puzzleStore.addInputLetter(props.letter)
+  store.addInputLetter(props.letter)
 }
 
 const onPressEnd = () => {

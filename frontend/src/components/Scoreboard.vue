@@ -64,13 +64,11 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { usePuzzleStore } from '@/stores/puzzle'
-import { useUserStore } from '@/stores/user'
+import { useStore } from '@/stores'
 import SegmentedControl from '@/components/SegmentedControl.vue'
 import GeniusBar from '@/components/GeniusBar.vue'
 
-const puzzleStore = usePuzzleStore()
-const userStore = useUserStore()
+const store = useStore()
 
 const viewMode = ref('individual')
 
@@ -79,17 +77,17 @@ const viewOptions = [
   { label: 'Teams', value: 'teams' }
 ]
 
-const possiblePoints = computed(() => puzzleStore.possiblePoints)
+const possiblePoints = computed(() => store.possiblePoints)
 
 const sortedUsers = computed(() => {
-  return [...userStore.users]
+  return [...store.users]
     .sort((a, b) => b.points - a.points)
 })
 
 const sortedTeams = computed(() => {
   const teams = {}
   
-  userStore.users.forEach(user => {
+  store.users.forEach(user => {
     if (!teams[user.teamId]) {
       teams[user.teamId] = {
         id: user.teamId,

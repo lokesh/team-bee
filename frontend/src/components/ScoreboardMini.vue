@@ -15,20 +15,20 @@
 
 <script setup>
 import { computed } from 'vue'
-import { usePuzzleStore } from '@/stores/puzzle'
+import { useStore } from '@/stores'
 import GeniusBar from '@/components/GeniusBar.vue'
 
-const puzzleStore = usePuzzleStore()
+const store = useStore()
 
 const displayPoints = computed(() => {
-  return puzzleStore.teamMode ? puzzleStore.teamPoints : puzzleStore.points
+  return store.teamMode ? store.teamPoints : store.points
 })
 
-const points = computed(() => puzzleStore.points)
-const possiblePoints = computed(() => puzzleStore.possiblePoints)
+const points = computed(() => store.points)
+const possiblePoints = computed(() => store.possiblePoints)
 
 const openScoreboard = () => {
-  puzzleStore.openModal('scoreboard')
+  store.openModal('scoreboard')
 }
 </script>
 

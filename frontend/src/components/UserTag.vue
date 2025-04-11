@@ -9,7 +9,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useUserStore } from '@/stores/user'
+import { useStore } from '@/stores'
 
 const props = defineProps({
   userId: {
@@ -18,8 +18,8 @@ const props = defineProps({
   },
 })
 
-const userStore = useUserStore()
-const user = computed(() => userStore.getUserById(props.userId))
+const store = useStore()
+const user = computed(() => store.getUserById(props.userId))
 </script>
 
 <style scoped>

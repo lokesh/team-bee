@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@/stores/user'
+import { useStore } from '@/stores'
 import GameView from '@/views/GameView.vue'
 import LoginView from '@/views/LoginView.vue'
 
@@ -14,8 +14,8 @@ const routes = [
     name: 'Game',
     component: GameView,
     beforeEnter: (to, from) => {
-      const userStore = useUserStore()
-      if (!userStore.currentUserId) {
+      const store = useStore()
+      if (!store.userId) {
         return { name: 'Login' }
       }
     },

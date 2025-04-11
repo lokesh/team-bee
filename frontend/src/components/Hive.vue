@@ -16,14 +16,14 @@
 
 <script setup>
 import { computed } from 'vue'
-import { usePuzzleStore } from '@/stores/puzzle'
+import { useStore } from '@/stores'
 import HiveCell from './HiveCell.vue'
 
-const puzzleStore = usePuzzleStore()
+const store = useStore()
 
-const puzzle = computed(() => puzzleStore.currentPuzzle)
+const puzzle = computed(() => store.currentPuzzle)
 const centerLetter = computed(() => puzzle.value?.center_letter)
-const outerLetters = computed(() => puzzleStore.outerLetters)
+const outerLetters = computed(() => store.outerLetters)
 </script>
 
 <style scoped>

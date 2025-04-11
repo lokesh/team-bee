@@ -1,22 +1,20 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useUserStore } from './stores/user'
-import { usePuzzleStore } from './stores/puzzle'
+import { useStore } from '@/stores'
 import PageSpinner from '@/components/PageSpinner.vue'
 import Debugger from '@/components/Debugger.vue'
 
 const router = useRouter()
 const route = useRoute()
-const userStore = useUserStore()
-const puzzleStore = usePuzzleStore()
+const store = useStore()
 
 const isLoaded = ref(false)
 const showDebugger = ref(true) // You might want to move this to a separate store
 
 onBeforeMount(async () => {
-  await userStore.loadUsers()
-  await puzzleStore.loadPuzzles()
+  await store.loadUsers()
+  await store.loadPuzzles()
 
   // Check if user is already set, then skip login screen
   const storedUserId = localStorage.getItem('teamBeeUserId')
@@ -32,7 +30,7 @@ onBeforeMount(async () => {
     }
     
     if (userId) {
-      userStore.setUserId(userId)
+      store.setUserId(userId)
       if (route.name !== 'Game') {
         router.push({ name: 'Game' })
       }

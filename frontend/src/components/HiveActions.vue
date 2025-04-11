@@ -22,14 +22,14 @@
 </template>
 
 <script setup>
-import { usePuzzleStore } from '@/stores/puzzle'
+import { useStore } from '@/stores'
 import EventBus from '@/event-bus'
 import HiveButton from './HiveButton.vue'
 
-const puzzleStore = usePuzzleStore()
+const store = useStore()
 
 const onDelete = () => {
-  puzzleStore.removeInputLetter()
+  store.removeInputLetter()
 }
 
 const onEnter = () => {
@@ -37,7 +37,7 @@ const onEnter = () => {
 }
 
 const onShuffle = () => {
-  puzzleStore.shuffleOuterLetters()
+  store.shuffleOuterLetters()
 }
 </script>
 

@@ -96,12 +96,13 @@ export const useStore = defineStore('main', {
   actions: {
     setUserId(userId) {
       this.userId = userId
-      localStorage.setItem('userId', userId)
+      console.log('setting userId', userId)
+      localStorage.setItem('teamBeeUserId', userId)
     },
 
     clearUser() {
       this.userId = 0
-      localStorage.removeItem('userId')
+      localStorage.removeItem('teamBeeUserId')
     },
 
     setPuzzleId(puzzleId) {

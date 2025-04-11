@@ -25,7 +25,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { usePuzzleStore } from '@/stores/puzzle'
+import { useStore } from '@/stores'
 import { GENIUS_PERCENTAGE_SOLO, GENIUS_PERCENTAGE_TEAM } from '@/utils/constants'
 
 const props = defineProps({
@@ -39,10 +39,10 @@ const props = defineProps({
   },
 })
 
-const puzzleStore = usePuzzleStore()
+const store = useStore()
 
 const geniusPercent = computed(() => 
-  puzzleStore.teamMode ? GENIUS_PERCENTAGE_TEAM : GENIUS_PERCENTAGE_SOLO
+  store.teamMode ? GENIUS_PERCENTAGE_TEAM : GENIUS_PERCENTAGE_SOLO
 )
 
 const geniusPoints = computed(() => 
@@ -62,7 +62,7 @@ const flagStyles = computed(() => {
 })
 
 const label = computed(() => 
-  puzzleStore.teamMode ? 'Team' : 'Solo'
+  store.teamMode ? 'Team' : 'Solo'
 )
 
 const percentComplete = computed(() => 
