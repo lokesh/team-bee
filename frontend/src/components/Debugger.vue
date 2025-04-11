@@ -1,28 +1,20 @@
 <template>
   <div>
-    User Id: {{ userId }}<br />
-    Puzzle Id: {{ puzzleId }}<br />
-    Puzzle Order: {{ puzzleOrder }}<br />
-    Puzzle Order Length: {{ puzzleOrder.length }}<br />
-    Puzzle Order Index: {{ puzzleOrderIndex }}<br />
+    User Id: {{ store.userId }}<br />
+    Puzzle Id: {{ store.puzzleId }}<br />
+    Puzzle Order: {{ store.puzzleOrder }}<br />
+    Puzzle Order Length: {{ store.puzzleOrder.length }}<br />
+    Puzzle Order Index: {{ store.puzzleOrderIndex }}<br />
+    Puzzle Progress: {{ store.puzzleProgress }}<br />
+    userProgressDataLoaded: {{ store.userProgressDataLoaded }}<br />
   </div>
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
 import { useStore } from '@/stores'
 
 const store = useStore()
 
-const puzzles = computed(() => store.puzzles)
-const puzzleOrder = computed(() => store.puzzleOrder)
-const puzzleId = computed(() => store.currentPuzzleId)
-const userId = computed(() => store.userId)
-const puzzleOrderIndex = computed(() => store.puzzleOrderIndex)
-
-onMounted(() => {
-  console.log(puzzles.value)
-})
 </script>
 
 <style scoped>

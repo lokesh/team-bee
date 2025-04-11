@@ -55,6 +55,11 @@ const store = useStore()
 const userProgressDataLoaded = computed(() => store.userProgressDataLoaded)
 const modal = computed(() => store.modal)
 
+// Switch to puzzle, either selected or newest
+const puzzleId = store.puzzleId ? store.puzzleId : store.newestPuzzle.id
+await store.switchPuzzle(puzzleId)
+
+
 const onKey = (e) => {
   // Note: Enter key is handled in HiveInput.vue
 
