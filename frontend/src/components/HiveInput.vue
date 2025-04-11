@@ -30,9 +30,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, getCurrentInstance } from 'vue'
 import { useStore } from '@/stores'
-import EventBus from '@/event-bus'
 import { calcPoints, isPangram } from '@/utils'
 
 const store = useStore()
@@ -109,12 +108,12 @@ const submit = () => {
 
 onMounted(() => {
   document.addEventListener('keydown', onKey)
-  EventBus.$on('submitInput', submit)
+  getCurrentInstance().appContext.config.globalProperties.$eventBus.on('submitInput', submit)
 })
 
 onUnmounted(() => {
   document.removeEventListener('keydown', onKey)
-  EventBus.$off('submitInput', submit)
+  getCurrentInstance().appContext.config.globalProperties.$eventBus.off('submitInput', submit)
 })
 </script>
 

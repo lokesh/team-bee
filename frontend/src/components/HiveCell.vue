@@ -30,9 +30,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, getCurrentInstance } from 'vue'
 import { useStore } from '@/stores'
-import EventBus from '@/event-bus'
 
 const props = defineProps({
   letter: {
@@ -64,11 +63,11 @@ const onPressEnd = () => {
 }
 
 onMounted(() => {
-  EventBus.$on('letterKeyPress', onLetterKeyPress)
+  getCurrentInstance().appContext.config.globalProperties.$eventBus.on('letterKeyPress', onLetterKeyPress)
 })
 
 onUnmounted(() => {
-  EventBus.$off('letterKeyPress', onLetterKeyPress)
+  getCurrentInstance().appContext.config.globalProperties.$eventBus.off('letterKeyPress', onLetterKeyPress)
 })
 </script>
 

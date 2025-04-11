@@ -43,6 +43,9 @@ export const useStore = defineStore('main', {
     puzzleId: 0,
     input: '',
     modal: null,
+    isLoading: false,
+    isReady: false,
+    storeReady: false
   }),
 
   getters: {
@@ -66,14 +69,30 @@ export const useStore = defineStore('main', {
       return state.puzzles[state.puzzleOrder[state.puzzleOrder.length - 1]]
     },
 
-    teamMode: (state) => state.puzzleProgress[state.userId]?.team_mode || false,
-    hint: (state) => state.puzzleProgress[state.userId]?.hint || false,
-    revealed: (state) => state.puzzleProgress[state.userId]?.revealed || false,
-    foundWords: (state) => state.puzzleProgress[state.userId]?.found_words || [],
+    teamMode: (state) => state.puzzleProgress?.[state.userId]?.team_mode || false,
+    hint: (state) => state.puzzleProgress?.[state.userId]?.hint || false,
+    revealed: (state) => state.puzzleProgress?.[state.userId]?.revealed || false,
+    
+    foundWords: (state) => {
+      console.log('Accessing foundWords:', {
+        userId: state.userId,
+        hasProgress: !!state.puzzleProgress,
+        hasUserProgress: !!state.puzzleProgress?.[state.userId],
+        foundWords: state.puzzleProgress?.[state.userId]?.found_words,
+        isReady: state.isReady,
+        storeReady: state.storeReady
+      })
+      if (!state.storeReady) return []
+      return state.puzzleProgress?.[state.userId]?.found_words || []
+    },
+
     teamFoundWords: (state) => {
+      if (!state.puzzleProgress) return []
       const words = []
       Object.values(state.puzzleProgress).forEach(progress => {
-        words.push(...progress.found_words)
+        if (progress?.found_words) {
+          words.push(...progress.found_words)
+        }
       })
       return [...new Set(words)]
     },
@@ -82,27 +101,72 @@ export const useStore = defineStore('main', {
       if (!getters.puzzle) return []
       return [getters.puzzle.center_letter, ...getters.puzzle.outer_letters]
     },
-    points: (state, getters) => calcPoints(getters.foundWords, getters.letters),
-    teamPoints: (state, getters) => calcPoints(getters.teamFoundWords, getters.letters),
+
+    points: (state) => {
+      console.log('Calculating points:', {
+        storeReady: state.storeReady,
+        foundWords: state.puzzleProgress?.[state.userId]?.found_words,
+        letters: state.puzzles[state.puzzleId]?.outer_letters,
+        isLoading: state.isLoading,
+        isReady: state.isReady
+      })
+      if (!state.storeReady) return 0
+      const foundWords = state.puzzleProgress?.[state.userId]?.found_words || []
+      const letters = state.puzzles[state.puzzleId]?.outer_letters || []
+      if (!foundWords.length || !letters.length) return 0
+      return calcPoints(foundWords, letters)
+    },
+
+    teamPoints: (state) => {
+      console.log('Calculating team points:', {
+        storeReady: state.storeReady,
+        hasProgress: !!state.puzzleProgress,
+        isLoading: state.isLoading,
+        isReady: state.isReady
+      })
+      if (!state.storeReady) return 0
+      
+      // Get team words directly from state
+      const teamWords = []
+      if (state.puzzleProgress) {
+        Object.values(state.puzzleProgress).forEach(progress => {
+          if (progress?.found_words) {
+            teamWords.push(...progress.found_words)
+          }
+        })
+      }
+      
+      const letters = state.puzzles[state.puzzleId]?.outer_letters || []
+      if (!teamWords.length || !letters.length) return 0
+      return calcPoints([...new Set(teamWords)], letters)
+    },
+
     pointsForGenius: (state, getters) => {
+      if (!state.storeReady) return 0
       return Math.ceil(getters.possiblePoints * 0.9)
     },
+
     possiblePoints: (state, getters) => {
+      if (!state.storeReady) return 0
       if (!getters.puzzle) return 0
       return calcPoints(getters.puzzle.answers, getters.letters)
-    },
+    }
   },
 
   actions: {
     setUserId(userId) {
       console.log('Setting userId:', userId)
       this.userId = userId
+      this.isReady = false
+      this.storeReady = false
       localStorage.setItem('teamBeeUserId', userId)
     },
 
     clearUser() {
       console.log('Clearing user data')
       this.userId = 0
+      this.isReady = false
+      this.storeReady = false
       localStorage.removeItem('teamBeeUserId')
     },
 
@@ -183,11 +247,15 @@ export const useStore = defineStore('main', {
     },
 
     async switchPuzzle(puzzleId) {
-      console.log('Switching to puzzle:', puzzleId)
+      console.log('Starting puzzle switch:', puzzleId)
+      this.isLoading = true
+      this.isReady = false
+      this.storeReady = false
       this.puzzleId = puzzleId
       this.clearInput()
 
       try {
+        console.log('Fetching puzzle progress for:', puzzleId)
         const response = await axios.get(`/puzzles/${puzzleId}/users`)
         const progressCollection = {}
         
@@ -195,18 +263,38 @@ export const useStore = defineStore('main', {
           progressCollection[progress.user_id] = progress
         })
         
+        console.log('Setting puzzle progress:', {
+          userId: this.userId,
+          hasProgress: !!progressCollection[this.userId],
+          totalUsers: Object.keys(progressCollection).length,
+          isReady: this.isReady,
+          storeReady: this.storeReady
+        })
+        
         this.puzzleProgress = progressCollection
 
-        console.log(this.puzzleProgress)
-        console.log('Puzzle progress loaded for:', Object.keys(progressCollection).length, 'users')
-        console.log(this.puzzleProgress)
         if (!(this.userId in this.puzzleProgress)) {
           console.log('Creating new puzzle progress for user:', this.userId)
           await this.createUserPuzzleProgress(puzzleId)
         }
+
+        this.isReady = true
+        this.storeReady = true
+        console.log('Store is now ready:', {
+          isReady: this.isReady,
+          storeReady: this.storeReady,
+          userId: this.userId,
+          puzzleId: this.puzzleId,
+          hasProgress: !!this.puzzleProgress
+        })
       } catch (error) {
         console.error('Error switching puzzle:', error)
+        this.isReady = false
+        this.storeReady = false
         throw error
+      } finally {
+        this.isLoading = false
+        console.log('Completed puzzle switch:', puzzleId)
       }
     },
 

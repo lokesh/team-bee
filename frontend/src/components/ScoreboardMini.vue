@@ -24,7 +24,7 @@ const displayPoints = computed(() => {
   return store.teamMode ? store.teamPoints : store.points
 })
 
-const points = computed(() => store.points)
+const points = computed(() => store.points || 0)
 const possiblePoints = computed(() => store.possiblePoints)
 
 const openScoreboard = () => {

@@ -38,9 +38,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, getCurrentInstance } from 'vue'
 import { useStore } from '@/stores'
-import EventBus from '@/event-bus'
 import Hive from '@/components/Hive.vue'
 import HiveActions from '@/components/HiveActions.vue'
 import HiveInput from '@/components/HiveInput.vue'
@@ -62,7 +61,7 @@ const onKey = (e) => {
     store.removeInputLetter()
 
   } else if (e.keyCode > 64 && e.keyCode < 91) { // A-Z
-    EventBus.$emit('letterKeyPress', e.key.toLocaleLowerCase())
+    getCurrentInstance().appContext.config.globalProperties.$eventBus.emit('letterKeyPress', e.key.toLocaleLowerCase())
     store.addInputLetter(e.key)
 
   } else if (e.keyCode === 32) { // Space
