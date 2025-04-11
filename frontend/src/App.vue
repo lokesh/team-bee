@@ -12,19 +12,30 @@ const userStore = useUserStore()
 const puzzleStore = usePuzzleStore()
 
 const isLoaded = ref(false)
-const showDebugger = ref(false) // You might want to move this to a separate store
+const showDebugger = ref(true) // You might want to move this to a separate store
 
 onBeforeMount(async () => {
   await userStore.loadUsers()
   await puzzleStore.loadPuzzles()
 
   // Check if user is already set, then skip login screen
-  const userId = JSON.parse(localStorage.getItem('userId'))
-
-  if (userId) {
-    userStore.setUserId(userId)
-    if (route.name !== 'Game') {
-      router.push({ name: 'Game' })
+  const storedUserId = localStorage.getItem('teamBeeUserId')
+  let userId = null
+  
+  if (storedUserId) {
+    try {
+      // Try to parse as JSON first
+      userId = JSON.parse(storedUserId)
+    } catch (e) {
+      // If it's not JSON, use the string value directly
+      userId = storedUserId
+    }
+    
+    if (userId) {
+      userStore.setUserId(userId)
+      if (route.name !== 'Game') {
+        router.push({ name: 'Game' })
+      }
     }
   }
 

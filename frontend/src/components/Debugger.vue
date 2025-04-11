@@ -1,5 +1,7 @@
 <template>
   <div>
+    User Id: {{ userId }}<br />
+    Player Name: {{ playerName }}<br />
     Puzzle Id: {{ puzzleId }}<br />
     Puzzle Order: {{ puzzleOrder }}<br />
     Puzzle Order Length: {{ puzzleOrder.length }}<br />
@@ -19,6 +21,7 @@ const puzzles = computed(() => puzzleStore.puzzles)
 const puzzleOrder = computed(() => puzzleStore.puzzleOrder)
 const puzzleId = computed(() => puzzleStore.currentPuzzleId)
 const userId = computed(() => userStore.currentUserId)
+const playerName = computed(() => userStore.currentUser?.name || 'Not logged in')
 const puzzleOrderIndex = computed(() => puzzleStore.puzzleOrderIndex)
 
 onMounted(() => {

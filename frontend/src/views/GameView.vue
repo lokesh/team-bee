@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { usePuzzleStore } from '@/stores/puzzle'
 import { useUserStore } from '@/stores/user'
 import EventBus from '@/event-bus'

@@ -6,9 +6,20 @@ const model = new Model('users');
 export const listUsers = async (req, res) => {
   try {
     const data = await model.select('*');
-    res.status(200).json(data.rows);
+    // Ensure we're sending valid JSON by checking the data
+    if (!Array.isArray(data.rows)) {
+      throw new Error('Database response is not in expected format');
+    }
+    // Sanitize the data to ensure it's valid JSON
+    const sanitizedData = data.rows.map(row => ({
+      id: Number(row.id),
+      name: String(row.name),
+      color: String(row.color)
+    }));
+    res.status(200).json(sanitizedData);
   } catch (err) {
-    res.status(200).json(err.stack);
+    console.error('Error fetching users:', err);
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
 

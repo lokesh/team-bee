@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 
