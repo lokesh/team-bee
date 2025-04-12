@@ -48,7 +48,6 @@ const outerLetters = computed(() => store.puzzle?.outer_letters)
 const letters = computed(() => [centerLetter.value, ...outerLetters.value])
 
 const onKey = (e) => {
-  console.log('onKey', e.keyCode)
   if (e.keyCode !== 13) return
   submit()
 }

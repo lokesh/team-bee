@@ -122,7 +122,6 @@ export const useStore = defineStore('main', () => {
   }
 
   function addInputLetter(letter) {
-    console.log('addInputLetter', letter)
     input.value = input.value + letter
   }
 
