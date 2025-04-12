@@ -1,259 +1,309 @@
 import { defineStore } from 'pinia'
+import { ref, computed } from 'vue'
 import axios from '@/axios'
 import { calcPoints } from '@/utils'
 import { parseCharArray, prepStrArray, shuffleArray } from '@/utils/array'
 
-export const useStore = defineStore('main', {
-  state: () => ({
-    showDebugger: false,
-    users: {},
-    puzzles: {},
-    puzzleOrder: [],
-    puzzleProgress: {},
-    userId: 0,
-    puzzleId: 0,
-    input: '',
-    modal: null,
-    isLoading: false,
-    isReady: false,
-    storeReady: false
-  }),
+export const useStore = defineStore('main', () => {
+  // State
+  const showDebugger = ref(false)
+  const users = ref({})
+  const puzzles = ref({})
+  const puzzleOrder = ref([])
+  const puzzleProgress = ref({})
+  const userId = ref(0)
+  const puzzleId = ref(0)
+  const input = ref('')
+  const modal = ref(null)
+  const isLoading = ref(false)
+  const isReady = ref(false)
+  const storeReady = ref(false)
 
-  getters: {
-    userProgressDataLoaded: (state) => {
-      return !!state.puzzleProgress[state.userId]
-    },
+  // Getters
+  const userProgressDataLoaded = computed(() => {
+    return !!puzzleProgress.value[userId.value]
+  })
 
-    user: (state) => {
-      return state.users[state.userId] || {}
-    },
+  const user = computed(() => {
+    return users.value[userId.value] || {}
+  })
 
-    puzzle: (state) => {
-      return state.puzzles[state.puzzleId] || {}
-    },
+  const puzzle = computed(() => {
+    return puzzles.value[puzzleId.value] || {}
+  })
 
-    puzzleOrderIndex: (state) => {
-      return state.puzzleOrder.indexOf(state.puzzleId)
-    },
+  const puzzleOrderIndex = computed(() => {
+    return puzzleOrder.value.indexOf(puzzleId.value)
+  })
 
-    newestPuzzle: (state) => {
-      return state.puzzles[state.puzzleOrder[state.puzzleOrder.length - 1]]
-    },
+  const newestPuzzle = computed(() => {
+    return puzzles.value[puzzleOrder.value[puzzleOrder.value.length - 1]]
+  })
 
-    teamMode: (state) => state.puzzleProgress?.[state.userId]?.team_mode || false,
-    hint: (state) => state.puzzleProgress?.[state.userId]?.hint || false,
-    revealed: (state) => state.puzzleProgress?.[state.userId]?.revealed || false,
+  const teamMode = computed(() => puzzleProgress.value?.[userId.value]?.team_mode || false)
+  const hint = computed(() => puzzleProgress.value?.[userId.value]?.hint || false)
+  const revealed = computed(() => puzzleProgress.value?.[userId.value]?.revealed || false)
+  
+  const foundWords = computed(() => {
+    if (!storeReady.value) return []
+    return puzzleProgress.value?.[userId.value]?.found_words || []
+  })
+
+  const teamFoundWords = computed(() => {
+    if (!puzzleProgress.value) return []
+    const words = []
+    Object.values(puzzleProgress.value).forEach(progress => {
+      if (progress?.found_words) {
+        words.push(...progress.found_words)
+      }
+    })
+    return [...new Set(words)]
+  })
+
+  const letters = computed(() => {
+    if (!puzzle.value) return []
+    return [puzzle.value.center_letter, ...puzzle.value.outer_letters]
+  })
+
+  const points = computed(() => {
+    if (!storeReady.value) return 0
+    const foundWords = puzzleProgress.value?.[userId.value]?.found_words || []
+    const letters = puzzles.value[puzzleId.value]?.outer_letters || []
+    if (!foundWords.length || !letters.length) return 0
+    return calcPoints(foundWords, letters)
+  })
+
+  const teamPoints = computed(() => {
+    if (!storeReady.value) return 0
     
-    foundWords: (state) => {
-      if (!state.storeReady) return []
-      return state.puzzleProgress?.[state.userId]?.found_words || []
-    },
-
-    teamFoundWords: (state) => {
-      if (!state.puzzleProgress) return []
-      const words = []
-      Object.values(state.puzzleProgress).forEach(progress => {
+    const teamWords = []
+    if (puzzleProgress.value) {
+      Object.values(puzzleProgress.value).forEach(progress => {
         if (progress?.found_words) {
-          words.push(...progress.found_words)
+          teamWords.push(...progress.found_words)
         }
       })
-      return [...new Set(words)]
-    },
-
-    letters: (state, getters) => {
-      if (!getters.puzzle) return []
-      return [getters.puzzle.center_letter, ...getters.puzzle.outer_letters]
-    },
-
-    points: (state) => {
-      if (!state.storeReady) return 0
-      const foundWords = state.puzzleProgress?.[state.userId]?.found_words || []
-      const letters = state.puzzles[state.puzzleId]?.outer_letters || []
-      if (!foundWords.length || !letters.length) return 0
-      return calcPoints(foundWords, letters)
-    },
-
-    teamPoints: (state) => {
-      if (!state.storeReady) return 0
-      
-      const teamWords = []
-      if (state.puzzleProgress) {
-        Object.values(state.puzzleProgress).forEach(progress => {
-          if (progress?.found_words) {
-            teamWords.push(...progress.found_words)
-          }
-        })
-      }
-      
-      const letters = state.puzzles[state.puzzleId]?.outer_letters || []
-      if (!teamWords.length || !letters.length) return 0
-      return calcPoints([...new Set(teamWords)], letters)
-    },
-
-    pointsForGenius: (state, getters) => {
-      if (!state.storeReady) return 0
-      return Math.ceil(getters.possiblePoints * 0.9)
-    },
-
-    possiblePoints: (state, getters) => {
-      if (!state.storeReady) return 0
-      if (!getters.puzzle) return 0
-      return calcPoints(getters.puzzle.answers, getters.letters)
     }
-  },
+    
+    const letters = puzzles.value[puzzleId.value]?.outer_letters || []
+    if (!teamWords.length || !letters.length) return 0
+    return calcPoints([...new Set(teamWords)], letters)
+  })
 
-  actions: {
-    setUserId(userId) {
-      this.userId = userId
-      this.isReady = false
-      this.storeReady = false
-      localStorage.setItem('teamBeeUserId', userId)
-    },
+  const pointsForGenius = computed(() => {
+    if (!storeReady.value) return 0
+    return Math.ceil(possiblePoints.value * 0.9)
+  })
 
-    clearUser() {
-      this.userId = 0
-      this.isReady = false
-      this.storeReady = false
-      localStorage.removeItem('teamBeeUserId')
-    },
+  const possiblePoints = computed(() => {
+    if (!storeReady.value) return 0
+    if (!puzzle.value) return 0
+    return calcPoints(puzzle.value.answers, letters.value)
+  })
 
-    setPuzzleId(puzzleId) {
-      this.puzzleId = puzzleId
-    },
+  // Actions
+  function setUserId(newUserId) {
+    userId.value = newUserId
+    isReady.value = false
+    storeReady.value = false
+    localStorage.setItem('teamBeeUserId', newUserId)
+  }
 
-    shuffleOuterLetters() {
-      if (this.puzzles[this.puzzleId]) {
-        this.puzzles[this.puzzleId].outer_letters = shuffleArray(this.puzzles[this.puzzleId].outer_letters)
-      }
-    },
+  function clearUser() {
+    userId.value = 0
+    isReady.value = false
+    storeReady.value = false
+    localStorage.removeItem('teamBeeUserId')
+  }
 
-    addInputLetter(letter) {
-      this.input = this.input + letter
-    },
+  function setPuzzleId(newPuzzleId) {
+    puzzleId.value = newPuzzleId
+  }
 
-    clearInput() {
-      this.input = ''
-    },
+  function shuffleOuterLetters() {
+    if (puzzles.value[puzzleId.value]) {
+      puzzles.value[puzzleId.value].outer_letters = shuffleArray(puzzles.value[puzzleId.value].outer_letters)
+    }
+  }
 
-    removeInputLetter() {
-      this.input = this.input.slice(0, -1)
-    },
+  function addInputLetter(letter) {
+    input.value = input.value + letter
+  }
 
-    setInput(input) {
-      this.input = input
-    },
+  function clearInput() {
+    input.value = ''
+  }
 
-    openModal(modal) {
-      this.modal = modal
-    },
+  function removeInputLetter() {
+    input.value = input.value.slice(0, -1)
+  }
 
-    closeModal() {
-      this.modal = null
-    },
+  function setInput(newInput) {
+    input.value = newInput
+  }
 
-    async loadUsers() {
-      try {
-        const response = await axios.get('/users')
-        const users = {}
-        response.data.forEach(user => {
-          users[user.id] = user
-        })
-        this.users = users
-      } catch (error) {
-        throw error
-      }
-    },
+  function openModal(newModal) {
+    modal.value = newModal
+  }
 
-    async loadPuzzles() {
-      try {
-        const response = await axios.get('/puzzles?hide_future=false&order_by=date&dir=asc')
-        const puzzles = {}
-        response.data.forEach((puzzle) => {
-          this.puzzleOrder.push(puzzle.id)
-          puzzle.outer_letters = parseCharArray(puzzle.outer_letters)
-          puzzles[puzzle.id] = puzzle
-        })
-        this.puzzles = puzzles
-      } catch (error) {
-        throw error
-      }
-    },
+  function closeModal() {
+    modal.value = null
+  }
 
-    async switchPuzzle(puzzleId) {
-      this.isLoading = true
-      this.isReady = false
-      this.storeReady = false
-      this.puzzleId = puzzleId
-      this.clearInput()
-
-      try {
-        const response = await axios.get(`/puzzles/${puzzleId}/users`)
-        const progressCollection = {}
-        
-        response.data.forEach(progress => {
-          progressCollection[progress.user_id] = progress
-        })
-        
-        this.puzzleProgress = progressCollection
-
-        if (!(this.userId in this.puzzleProgress)) {
-          await this.createUserPuzzleProgress(puzzleId)
-        }
-
-        this.isReady = true
-        this.storeReady = true
-      } catch (error) {
-        this.isReady = false
-        this.storeReady = false
-        throw error
-      } finally {
-        this.isLoading = false
-      }
-    },
-
-    async createUserPuzzleProgress(puzzleId) {
-      try {
-        const response = await axios.post(`/puzzles/${puzzleId}/users/${this.userId}`)
-        this.puzzleProgress[this.userId] = response.data
-      } catch (error) {
-        throw error
-      }
-    },
-
-    async addFoundWord(word) {
-      this.puzzleProgress[this.userId].found_words.push(word)
-      this.puzzleProgress[this.userId].found_words.sort()
-
-      try {
-        await axios.put(`/puzzles/${this.puzzleId}/users/${this.userId}`, {
-          found_words: prepStrArray(this.puzzleProgress[this.userId].found_words),
-        })
-      } catch (error) {
-        throw error
-      }
-    },
-
-    async toggleSetting(setting) {
-      const settingKey = setting === 'teamMode' ? 'team_mode' : setting
-      const currentValue = this.puzzleProgress[this.userId]?.[settingKey] || false
-      
-      this.puzzleProgress[this.userId][settingKey] = !currentValue
-
-      try {
-        await axios.put(`/puzzles/${this.puzzleId}/users/${this.userId}`, {
-          [settingKey]: !currentValue,
-        })
-      } catch (error) {
-        throw error
-      }
-    },
-
-    async loadProgress(data) {
-      const progress = {}
-      data.forEach(item => {
-        progress[item.userid] = item.progress
+  async function loadUsers() {
+    try {
+      const response = await axios.get('/users')
+      const usersMap = {}
+      response.data.forEach(user => {
+        usersMap[user.id] = user
       })
-      this.puzzleProgress = progress
-    },
-  },
+      users.value = usersMap
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async function loadPuzzles() {
+    try {
+      const response = await axios.get('/puzzles?hide_future=false&order_by=date&dir=asc')
+      const puzzlesMap = {}
+      response.data.forEach((puzzle) => {
+        puzzleOrder.value.push(puzzle.id)
+        puzzle.outer_letters = parseCharArray(puzzle.outer_letters)
+        puzzlesMap[puzzle.id] = puzzle
+      })
+      puzzles.value = puzzlesMap
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async function switchPuzzle(newPuzzleId) {
+    isLoading.value = true
+    isReady.value = false
+    storeReady.value = false
+    puzzleId.value = newPuzzleId
+    clearInput()
+
+    try {
+      const response = await axios.get(`/puzzles/${newPuzzleId}/users`)
+      const progressCollection = {}
+      
+      response.data.forEach(progress => {
+        progressCollection[progress.user_id] = progress
+      })
+      
+      puzzleProgress.value = progressCollection
+
+      if (!(userId.value in puzzleProgress.value)) {
+        await createUserPuzzleProgress(newPuzzleId)
+      }
+
+      isReady.value = true
+      storeReady.value = true
+    } catch (error) {
+      isReady.value = false
+      storeReady.value = false
+      throw error
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  async function createUserPuzzleProgress(newPuzzleId) {
+    try {
+      const response = await axios.post(`/puzzles/${newPuzzleId}/users/${userId.value}`)
+      puzzleProgress.value[userId.value] = response.data
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async function addFoundWord(word) {
+    puzzleProgress.value[userId.value].found_words.push(word)
+    puzzleProgress.value[userId.value].found_words.sort()
+
+    try {
+      await axios.put(`/puzzles/${puzzleId.value}/users/${userId.value}`, {
+        found_words: prepStrArray(puzzleProgress.value[userId.value].found_words),
+      })
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async function toggleSetting(setting) {
+    const settingKey = setting === 'teamMode' ? 'team_mode' : setting
+    const currentValue = puzzleProgress.value[userId.value]?.[settingKey] || false
+    
+    puzzleProgress.value[userId.value][settingKey] = !currentValue
+
+    try {
+      await axios.put(`/puzzles/${puzzleId.value}/users/${userId.value}`, {
+        [settingKey]: !currentValue,
+      })
+    } catch (error) {
+      throw error
+    }
+  }
+
+  function loadProgress(data) {
+    const progress = {}
+    data.forEach(item => {
+      progress[item.userid] = item.progress
+    })
+    puzzleProgress.value = progress
+  }
+
+  return {
+    // State
+    showDebugger,
+    users,
+    puzzles,
+    puzzleOrder,
+    puzzleProgress,
+    userId,
+    puzzleId,
+    input,
+    modal,
+    isLoading,
+    isReady,
+    storeReady,
+
+    // Getters
+    userProgressDataLoaded,
+    user,
+    puzzle,
+    puzzleOrderIndex,
+    newestPuzzle,
+    teamMode,
+    hint,
+    revealed,
+    foundWords,
+    teamFoundWords,
+    letters,
+    points,
+    teamPoints,
+    pointsForGenius,
+    possiblePoints,
+
+    // Actions
+    setUserId,
+    clearUser,
+    setPuzzleId,
+    shuffleOuterLetters,
+    addInputLetter,
+    clearInput,
+    removeInputLetter,
+    setInput,
+    openModal,
+    closeModal,
+    loadUsers,
+    loadPuzzles,
+    switchPuzzle,
+    createUserPuzzleProgress,
+    addFoundWord,
+    toggleSetting,
+    loadProgress
+  }
 }) 
