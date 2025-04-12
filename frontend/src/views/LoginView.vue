@@ -27,7 +27,7 @@ const users = computed(() => store.users)
 
 const login = (id) => {
   store.setUserId(id)
-  router.push('debug')
+  router.push('game')
 }
 
 onMounted(() => {

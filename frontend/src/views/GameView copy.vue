@@ -21,7 +21,18 @@
 
       <scoreboard-mini class="scoreboard-mini" />
       <hive-input class="hive-input" />
+      <div class="hive-positioner">
+        <div class="hive-sizer">
+          <hive />
+        </div>
+      </div>
+      <hive-actions class="hive-actions" />
     </div>
+
+    <scoreboard
+      class="col-scoreboard"
+      :class="{ 'modal': modal === 'scoreboard' }"
+    />
   </div>
   <page-spinner v-else />
 </template>
