@@ -1,3 +1,12 @@
+# To-do
+
+- [ ] Deploy to Raleway
+- [ ] Host at teambee.live
+- [ ] Move in Admin
+
+
+
+
 # 🐝 Team Bee API
 
 A Node Express API server hosted on Heroku that powers the Team Bee game.
