@@ -10,7 +10,7 @@ const route = useRoute()
 const store = useStore()
 
 const isLoaded = ref(false)
-const showDebugger = ref(true) // You might want to move this to a separate store
+const showDebugger = ref(false) // You might want to move this to a separate store
 
 onBeforeMount(async () => {
   await store.loadUsers()
