@@ -16,7 +16,6 @@ const store = useStore()
 
 const debugItems = [
   // State values
-  'showDebugger',
   'userId',
   'puzzleId',
   'input',

@@ -29,12 +29,16 @@
       </div>
       <hive-actions class="hive-actions" />
     </div>
+    <scoreboard
+      class="col-scoreboard"
+      :class="{ 'modal': modal === 'scoreboard' }"
+    />
   </div>
   <page-spinner v-else />
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, getCurrentInstance } from 'vue'
+import { computed, onMounted, onUnmounted } from 'vue'
 import { useStore } from '@/stores'
 import Hive from '@/components/Hive.vue'
 import HiveActions from '@/components/HiveActions.vue'
@@ -121,4 +125,48 @@ onUnmounted(() => {
 .hive-input {
   margin-bottom: calc(var(--gutter) * 2);
 }
-</style> 
+
+.hive-positioner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: calc(var(--gutter) * 2);
+}
+
+.hive-sizer {
+  flex: 1 1 auto;
+  max-width: 250px;
+}
+
+@media (min-width: 640px) {
+  .view {
+    display: flex;
+  }
+
+  .col-gameboard {
+    flex: 0 1 420px;
+    /* The scoreboard has a padding left that already creates the gutter */
+    padding-right: 0;
+  }
+
+  .user-switcher-button {
+    display: none;
+  }
+
+  .scoreboard-mini {
+    display: none;
+  }
+
+  .hive-wrapper {
+    max-width: auto;
+  }
+
+  .col-scoreboard {
+    display: block;
+    flex: 1 1 auto;
+  }
+
+  .col-scoreboard.modal {
+    position: static;
+  }
+}
+</style>

@@ -6,7 +6,6 @@ import { parseCharArray, prepStrArray, shuffleArray } from '@/utils/array'
 
 export const useStore = defineStore('main', () => {
   // State
-  const showDebugger = ref(false)
   const users = ref({})
   const puzzles = ref({})
   const puzzleOrder = ref([])
@@ -244,7 +243,6 @@ export const useStore = defineStore('main', () => {
 
   return {
     // State
-    showDebugger,
     users,
     puzzles,
     puzzleOrder,

@@ -42,4 +42,4 @@ const openScoreboard = () => {
 .msg-score {
   margin-bottom: 8px;
 }
-</style> 
+</style>

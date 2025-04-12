@@ -19,7 +19,7 @@ const props = defineProps({
 })
 
 const store = useStore()
-const user = computed(() => store.getUserById(props.userId))
+const user = computed(() => store.users[props.userId])
 </script>
 
 <style scoped>

@@ -3,7 +3,6 @@ import { ref, onBeforeMount } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStore } from '@/stores'
 import PageSpinner from '@/components/PageSpinner.vue'
-import Debugger from '@/components/Debugger.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -42,9 +41,7 @@ onBeforeMount(async () => {
 
 <template>
   <div class="app">
-    <debugger v-if="store.showDebugger" />
-    <router-view v-if="isLoaded">
-    </router-view>
+    <router-view v-if="isLoaded" />
     <page-spinner v-else />
   </div>
 </template>

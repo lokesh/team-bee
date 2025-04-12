@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, getCurrentInstance } from 'vue'
+import { ref, onMounted, onUnmounted, } from 'vue'
 import { useStore } from '@/stores'
 import emitter from '@/eventBus'
 

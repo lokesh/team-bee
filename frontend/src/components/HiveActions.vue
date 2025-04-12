@@ -24,7 +24,6 @@
 <script setup>
 import { useStore } from '@/stores'
 import HiveButton from './HiveButton.vue'
-import { getCurrentInstance } from 'vue'
 import emitter from '@/eventBus'
 
 const store = useStore()
@@ -38,6 +37,7 @@ const onEnter = () => {
 }
 
 const onShuffle = () => {
+  console.log('onShuffle')
   store.shuffleOuterLetters()
 }
 </script>
