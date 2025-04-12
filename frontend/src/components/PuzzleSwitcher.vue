@@ -1,7 +1,5 @@
 <template>
   <div class="switcher">
-    {{ puzzleOrder }}
-    {{  puzzleOrderIndex }}
     <button
       v-visible="puzzleOrderIndex !== 0"
       class="nav-button"

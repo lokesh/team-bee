@@ -20,7 +20,14 @@
       </div>
 
       <scoreboard-mini class="scoreboard-mini" />
+
       <hive-input class="hive-input" />
+      <div class="hive-positioner">
+        <div class="hive-sizer">
+          <hive />
+        </div>
+      </div>
+      <hive-actions class="hive-actions" />
     </div>
   </div>
   <page-spinner v-else />
@@ -46,7 +53,7 @@ const modal = computed(() => store.modal)
 
 const onKey = (e) => {
   // Note: Enter key is handled in HiveInput.vue
-
+  console.log('onKey', e.keyCode)
   if (e.keyCode === 8 || e.keyCode === 46) {  // Backspace and Delete
     store.removeInputLetter()
 

@@ -123,6 +123,7 @@ export const useStore = defineStore('main', () => {
   }
 
   function addInputLetter(letter) {
+    console.log('addInputLetter', letter)
     input.value = input.value + letter
   }
 
@@ -132,10 +133,6 @@ export const useStore = defineStore('main', () => {
 
   function removeInputLetter() {
     input.value = input.value.slice(0, -1)
-  }
-
-  function setInput(newInput) {
-    input.value = newInput
   }
 
   function openModal(newModal) {
@@ -283,7 +280,6 @@ export const useStore = defineStore('main', () => {
     addInputLetter,
     clearInput,
     removeInputLetter,
-    setInput,
     openModal,
     closeModal,
     loadUsers,

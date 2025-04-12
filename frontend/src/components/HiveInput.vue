@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, getCurrentInstance } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useStore } from '@/stores'
 import { calcPoints, isPangram } from '@/utils'
 import emitter from '@/eventBus'
@@ -38,19 +38,18 @@ import emitter from '@/eventBus'
 const store = useStore()
 const notice = ref(null)
 const input = ref(null)
-const isNoticeVisible = ref(false)
 const noticeMsg = ref('')
 
-const inputLetters = computed(() => store.inputLetters)
+const inputLetters = computed(() => store.input.split(''))
 const puzzle = computed(() => store.currentPuzzle)
 const foundWords = computed(() => store.foundWords)
-const teamMode = computed(() => store.teamMode)
 
-const centerLetter = computed(() => puzzle.value?.center_letter)
-const outerLetters = computed(() => puzzle.value?.outer_letters)
+const centerLetter = computed(() => store.puzzle?.center_letter)
+const outerLetters = computed(() => store.puzzle?.outer_letters)
 const letters = computed(() => [centerLetter.value, ...outerLetters.value])
 
 const onKey = (e) => {
+  console.log('onKey', e.keyCode)
   if (e.keyCode !== 13) return
   submit()
 }
@@ -74,7 +73,7 @@ const shake = () => {
 }
 
 const submit = () => {
-  const currentInput = inputLetters.value.join('')
+  const currentInput = store.input.value.join('')
   
   // Used a wrong letter
   if (!currentInput.split('').every(letter => letters.value.includes(letter))) {
