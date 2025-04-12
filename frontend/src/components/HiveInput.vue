@@ -41,7 +41,6 @@ const input = ref(null)
 const noticeMsg = ref('')
 
 const inputLetters = computed(() => store.input.split(''))
-const puzzle = computed(() => store.currentPuzzle)
 const foundWords = computed(() => store.foundWords)
 
 const centerLetter = computed(() => store.puzzle?.center_letter)
@@ -65,7 +64,7 @@ const onNoticeEnd = () => {
 
 const onShakeEnd = () => {
   input.value.classList.remove('input--error')
-  store.clearInputLetters()
+  store.clearInput()
 }
 
 const shake = () => {
@@ -73,7 +72,7 @@ const shake = () => {
 }
 
 const submit = () => {
-  const currentInput = store.input.value.join('')
+  const currentInput = store.input;
   
   // Used a wrong letter
   if (!currentInput.split('').every(letter => letters.value.includes(letter))) {
@@ -91,7 +90,7 @@ const submit = () => {
     // Already found
     showNotice('Already found')
     shake()
-  } else if (!puzzle.value.answers.includes(currentInput)) {
+  } else if (!store.puzzle.answers.includes(currentInput)) {
     // Not in word list
     showNotice('Not in word list')
     shake()
@@ -102,7 +101,7 @@ const submit = () => {
     showNotice(`${str} +${points}`)
 
     store.addFoundWord(currentInput)
-    store.clearInputLetters()
+    store.clearInput()
   }
 }
 

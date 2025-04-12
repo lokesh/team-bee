@@ -21,9 +21,8 @@ import HiveCell from './HiveCell.vue'
 
 const store = useStore()
 
-const puzzle = computed(() => store.currentPuzzle)
-const centerLetter = computed(() => puzzle.value?.center_letter)
-const outerLetters = computed(() => store.outerLetters)
+const centerLetter = computed(() => store.puzzle?.center_letter)
+const outerLetters = computed(() => store.puzzle?.outer_letters)
 </script>
 
 <style scoped>
