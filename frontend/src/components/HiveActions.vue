@@ -25,6 +25,7 @@
 import { useStore } from '@/stores'
 import HiveButton from './HiveButton.vue'
 import { getCurrentInstance } from 'vue'
+import emitter from '@/eventBus'
 
 const store = useStore()
 
@@ -33,7 +34,7 @@ const onDelete = () => {
 }
 
 const onEnter = () => {
-  getCurrentInstance().appContext.config.globalProperties.$eventBus.emit('submitInput')
+  emitter.emit('submitInput')
 }
 
 const onShuffle = () => {

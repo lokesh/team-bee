@@ -32,6 +32,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, getCurrentInstance } from 'vue'
 import { useStore } from '@/stores'
+import emitter from '@/eventBus'
 
 const props = defineProps({
   letter: {
@@ -63,11 +64,11 @@ const onPressEnd = () => {
 }
 
 onMounted(() => {
-  getCurrentInstance().appContext.config.globalProperties.$eventBus.on('letterKeyPress', onLetterKeyPress)
+  emitter.on('letterKeyPress', onLetterKeyPress)
 })
 
 onUnmounted(() => {
-  getCurrentInstance().appContext.config.globalProperties.$eventBus.off('letterKeyPress', onLetterKeyPress)
+  emitter.off('letterKeyPress', onLetterKeyPress)
 })
 </script>
 

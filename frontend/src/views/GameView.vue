@@ -37,6 +37,7 @@ import PageSpinner from '@/components/PageSpinner.vue'
 import PuzzleSwitcher from '@/components/PuzzleSwitcher.vue'
 import Scoreboard from '@/components/Scoreboard.vue'
 import ScoreboardMini from '@/components/ScoreboardMini.vue'
+import emitter from '@/eventBus'
 
 const store = useStore()
 
@@ -50,7 +51,7 @@ const onKey = (e) => {
     store.removeInputLetter()
 
   } else if (e.keyCode > 64 && e.keyCode < 91) { // A-Z
-    getCurrentInstance().appContext.config.globalProperties.$eventBus.emit('letterKeyPress', e.key.toLocaleLowerCase())
+    emitter.emit('letterKeyPress', e.key.toLocaleLowerCase())
     store.addInputLetter(e.key)
 
   } else if (e.keyCode === 32) { // Space

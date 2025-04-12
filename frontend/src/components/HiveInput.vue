@@ -33,6 +33,7 @@
 import { ref, computed, onMounted, onUnmounted, getCurrentInstance } from 'vue'
 import { useStore } from '@/stores'
 import { calcPoints, isPangram } from '@/utils'
+import emitter from '@/eventBus'
 
 const store = useStore()
 const notice = ref(null)
@@ -108,12 +109,12 @@ const submit = () => {
 
 onMounted(() => {
   document.addEventListener('keydown', onKey)
-  getCurrentInstance().appContext.config.globalProperties.$eventBus.on('submitInput', submit)
+  emitter.on('submitInput', submit)
 })
 
 onUnmounted(() => {
   document.removeEventListener('keydown', onKey)
-  getCurrentInstance().appContext.config.globalProperties.$eventBus.off('submitInput', submit)
+  emitter.off('submitInput', submit)
 })
 </script>
 
