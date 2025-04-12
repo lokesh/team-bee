@@ -10,7 +10,6 @@ const route = useRoute()
 const store = useStore()
 
 const isLoaded = ref(false)
-const showDebugger = ref(false) // You might want to move this to a separate store
 
 onBeforeMount(async () => {
   await store.loadUsers()
@@ -43,7 +42,7 @@ onBeforeMount(async () => {
 
 <template>
   <div class="app">
-    <debugger v-if="showDebugger" />
+    <debugger v-if="store.showDebugger" />
     <router-view v-if="isLoaded">
     </router-view>
     <page-spinner v-else />

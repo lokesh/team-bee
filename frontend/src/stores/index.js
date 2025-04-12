@@ -15,8 +15,6 @@ export const useStore = defineStore('main', () => {
   const puzzleId = ref(0)
   const input = ref('')
   const modal = ref(null)
-  const isLoading = ref(false)
-  const isReady = ref(false)
   const storeReady = ref(false)
 
   // Getters
@@ -61,7 +59,7 @@ export const useStore = defineStore('main', () => {
   })
 
   const letters = computed(() => {
-    if (!puzzle.value) return []
+    if (Object.keys(puzzle.value).length === 0) return []
     return [puzzle.value.center_letter, ...puzzle.value.outer_letters]
   })
 
@@ -104,14 +102,12 @@ export const useStore = defineStore('main', () => {
   // Actions
   function setUserId(newUserId) {
     userId.value = newUserId
-    isReady.value = false
     storeReady.value = false
     localStorage.setItem('teamBeeUserId', newUserId)
   }
 
   function clearUser() {
     userId.value = 0
-    isReady.value = false
     storeReady.value = false
     localStorage.removeItem('teamBeeUserId')
   }
@@ -179,8 +175,6 @@ export const useStore = defineStore('main', () => {
   }
 
   async function switchPuzzle(newPuzzleId) {
-    isLoading.value = true
-    isReady.value = false
     storeReady.value = false
     puzzleId.value = newPuzzleId
     clearInput()
@@ -199,14 +193,10 @@ export const useStore = defineStore('main', () => {
         await createUserPuzzleProgress(newPuzzleId)
       }
 
-      isReady.value = true
       storeReady.value = true
     } catch (error) {
-      isReady.value = false
       storeReady.value = false
       throw error
-    } finally {
-      isLoading.value = false
     }
   }
 
@@ -266,8 +256,6 @@ export const useStore = defineStore('main', () => {
     puzzleId,
     input,
     modal,
-    isLoading,
-    isReady,
     storeReady,
 
     // Getters

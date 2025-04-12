@@ -1,17 +1,9 @@
 <template>
   <div class="page">
     <div class="debug-info">
-      <div class="debug-item">
-        <span class="label">User ID:</span>
-        <span class="value">{{ store.userId }}</span>
-      </div>
-      <div class="debug-item">
-        <span class="label">Is Ready:</span>
-        <span class="value">{{ store.isReady }}</span>
-      </div>
-      <div class="debug-item">
-        <span class="label">Store Ready:</span>
-        <span class="value">{{ store.storeReady }}</span>
+      <div v-for="item in debugItems" :key="item" class="debug-item">
+        <span class="label">{{ formatLabel(item) }}:</span>
+        <span class="value">{{ store[item] }}</span>
       </div>
     </div>
   </div>
@@ -21,6 +13,39 @@
 import { useStore } from '@/stores'
 
 const store = useStore()
+
+const debugItems = [
+  // State values
+  'showDebugger',
+  'userId',
+  'puzzleId',
+  'input',
+  'modal',
+  'isLoading',
+  'isReady',
+  'storeReady',
+  
+  // Getters
+  'userProgressDataLoaded',
+  'user',
+  'puzzle',
+  'puzzleOrderIndex',
+  'newestPuzzle',
+  'teamMode',
+  'hint',
+  'revealed',
+  'foundWords',
+  'teamFoundWords',
+  'letters',
+  'points',
+  'teamPoints',
+  'pointsForGenius',
+  'possiblePoints'
+]
+
+const formatLabel = (key) => {
+  return key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')
+}
 </script>
 
 <style scoped>
@@ -55,5 +80,6 @@ const store = useStore()
   padding: 2px 4px;
   background: #f0f0f0;
   border-radius: 4px;
+  text-align: left;
 }
 </style> 
