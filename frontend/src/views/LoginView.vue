@@ -27,12 +27,8 @@ const users = computed(() => store.users)
 
 const login = (id) => {
   store.setUserId(id)
-  router.push('game')
+  router.push({ name: 'Game' })
 }
-
-onMounted(() => {
-  store.clearUser()
-})
 </script>
 
 <style scoped>

@@ -100,6 +100,7 @@ export const useStore = defineStore('main', () => {
 
   // Actions
   function setUserId(newUserId) {
+    console.log('setUserId', newUserId)
     userId.value = newUserId
     storeReady.value = false
     localStorage.setItem('teamBeeUserId', newUserId)
