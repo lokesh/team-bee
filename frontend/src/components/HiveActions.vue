@@ -37,7 +37,6 @@ const onEnter = () => {
 }
 
 const onShuffle = () => {
-  console.log('onShuffle')
   store.shuffleOuterLetters()
 }
 </script>

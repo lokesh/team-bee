@@ -79,7 +79,6 @@ const switchPuzzle = async (puzzleId) => {
 
 onMounted(async () => {
   document.addEventListener('keydown', onKey)
-  await store.loadPuzzles()
   // Switch to puzzle, either selected or newest
   const puzzleId = store.puzzleId ? store.puzzleId : store.newestPuzzle.id
   await store.switchPuzzle(puzzleId)
@@ -145,7 +144,7 @@ onUnmounted(() => {
   }
 
   .col-gameboard {
-    flex: 0 1 420px;
+    flex: 0 0 420px;
     /* The scoreboard has a padding left that already creates the gutter */
     padding-right: 0;
   }

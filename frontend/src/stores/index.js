@@ -93,7 +93,6 @@ export const useStore = defineStore('main', () => {
 
   // Actions
   function setUserId(newUserId) {
-    console.log('setUserId', newUserId)
     userId.value = newUserId
     localStorage.setItem('teamBeeUserId', newUserId)
   }
@@ -150,6 +149,7 @@ export const useStore = defineStore('main', () => {
     try {
       const response = await axios.get('/puzzles?hide_future=false&order_by=date&dir=asc')
       const puzzlesMap = {}
+      puzzleOrder.value = []
       response.data.forEach((puzzle) => {
         puzzleOrder.value.push(puzzle.id)
         puzzle.outer_letters = parseCharArray(puzzle.outer_letters)

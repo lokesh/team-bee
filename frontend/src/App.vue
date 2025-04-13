@@ -16,7 +16,6 @@ onBeforeMount(async () => {
 
   // Check if user is already set, then skip login screen
   const storedUserId = localStorage.getItem('teamBeeUserId')
-  console.log('1 storedUserId', storedUserId)
   let userId = null
   
   if (storedUserId) {
@@ -27,7 +26,7 @@ onBeforeMount(async () => {
       // If it's not JSON, use the string value directly
       userId = storedUserId
     }
-    console.log('2 userId', userId)
+
     if (userId) {
       store.setUserId(userId)
       if (route.name !== 'Game') {
