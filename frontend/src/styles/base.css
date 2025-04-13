@@ -87,6 +87,7 @@ button {
   font-size: 16px;
   border: var(--border);
   border-radius: 36px;
+  color: var(--color);
   background: white;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
