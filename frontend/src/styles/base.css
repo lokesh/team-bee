@@ -57,6 +57,11 @@
   box-sizing: border-box;
 }
 
+html, body {
+  /* Prevents double-tap zoom on touch devices and improves touch responsiveness */
+  touch-action: manipulation;
+}
+
 body {
   margin: 0;
   padding: 0;
