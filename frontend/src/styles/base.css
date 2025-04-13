@@ -67,6 +67,7 @@ body {
   padding: 0;
   color: var(--color);
   background: var(--color-bg);
+  overflow: hidden;
   /* Attempt to disable iOS double tap zoom with CSS. These stopped working as
   July 2020. */
   /* touch-action: manipulation;*/
