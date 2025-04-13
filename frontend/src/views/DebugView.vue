@@ -22,7 +22,6 @@ const debugItems = [
   'modal',
   'isLoading',
   'isReady',
-  'storeReady',
   
   // Getters
   'userProgressDataLoaded',

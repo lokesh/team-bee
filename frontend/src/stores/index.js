@@ -14,7 +14,6 @@ export const useStore = defineStore('main', () => {
   const puzzleId = ref(0)
   const input = ref('')
   const modal = ref(null)
-  const storeReady = ref(false)
 
   // Getters
   const userProgressDataLoaded = computed(() => {
@@ -42,7 +41,6 @@ export const useStore = defineStore('main', () => {
   const revealed = computed(() => puzzleProgress.value?.[userId.value]?.revealed || false)
   
   const foundWords = computed(() => {
-    if (!storeReady.value) return []
     return puzzleProgress.value?.[userId.value]?.found_words || []
   })
 
@@ -63,7 +61,6 @@ export const useStore = defineStore('main', () => {
   })
 
   const points = computed(() => {
-    if (!storeReady.value) return 0
     const foundWords = puzzleProgress.value?.[userId.value]?.found_words || []
     const letters = puzzles.value[puzzleId.value]?.outer_letters || []
     if (!foundWords.length || !letters.length) return 0
@@ -71,8 +68,6 @@ export const useStore = defineStore('main', () => {
   })
 
   const teamPoints = computed(() => {
-    if (!storeReady.value) return 0
-    
     const teamWords = []
     if (puzzleProgress.value) {
       Object.values(puzzleProgress.value).forEach(progress => {
@@ -88,12 +83,10 @@ export const useStore = defineStore('main', () => {
   })
 
   const pointsForGenius = computed(() => {
-    if (!storeReady.value) return 0
     return Math.ceil(possiblePoints.value * 0.9)
   })
 
   const possiblePoints = computed(() => {
-    if (!storeReady.value) return 0
     if (!puzzle.value) return 0
     return calcPoints(puzzle.value.answers, letters.value)
   })
@@ -102,13 +95,11 @@ export const useStore = defineStore('main', () => {
   function setUserId(newUserId) {
     console.log('setUserId', newUserId)
     userId.value = newUserId
-    storeReady.value = false
     localStorage.setItem('teamBeeUserId', newUserId)
   }
 
   function clearUser() {
     userId.value = 0
-    storeReady.value = false
     localStorage.removeItem('teamBeeUserId')
   }
 
@@ -171,7 +162,6 @@ export const useStore = defineStore('main', () => {
   }
 
   async function switchPuzzle(newPuzzleId) {
-    storeReady.value = false
     puzzleId.value = newPuzzleId
     clearInput()
 
@@ -188,10 +178,7 @@ export const useStore = defineStore('main', () => {
       if (!(userId.value in puzzleProgress.value)) {
         await createUserPuzzleProgress(newPuzzleId)
       }
-
-      storeReady.value = true
     } catch (error) {
-      storeReady.value = false
       throw error
     }
   }
@@ -251,7 +238,6 @@ export const useStore = defineStore('main', () => {
     puzzleId,
     input,
     modal,
-    storeReady,
 
     // Getters
     userProgressDataLoaded,
