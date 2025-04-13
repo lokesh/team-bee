@@ -1,9 +1,12 @@
 # To-do
 
-- [ ] Deploy to Raleway
-- [ ] Host at teambee.live
+- [x] Deploy to Raleway
+- [x] Host at teambee.live
 - [ ] Move in Admin
 
+- [x] Bug: double clicking on buttons
+- [ ] Bug: Missing UI buttons on desktop, see Figma images
+- [ ] PRevent zoom on mobile (see Letterwalk)
 
 
 

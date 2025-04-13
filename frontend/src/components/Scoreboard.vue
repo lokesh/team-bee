@@ -249,6 +249,7 @@ const hintCheck = (word) => {
   flex-wrap: wrap;
   align-content: flex-start;
   overflow-x: auto;
+  user-select:text;
 }
 
 .list-row {

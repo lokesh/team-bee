@@ -1,7 +1,7 @@
 <template>
   <button
     type="button"
-    @pointerdown="$emit('click')"
+    @click="$emit('click')"
   >
     <slot />
   </button>

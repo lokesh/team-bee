@@ -91,6 +91,9 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.view {
+  user-select: none;
+}
 .col-gameboard {
   padding: var(--gutter);
 }

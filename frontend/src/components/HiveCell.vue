@@ -6,7 +6,7 @@
       'outer': !center,
     }"
     viewBox="0 0 120 103.92304845413263"
-    @pointerdown="onClick"
+    @click="onClick"
   >
     <polygon
       class="shape"
