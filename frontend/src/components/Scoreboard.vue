@@ -63,7 +63,7 @@
 
           <div
             class="tags"
-            v-if="teamMode"
+            v-if="teamMode && !hintCheck(row.word)"
           >
             <user-tag
               v-for="user in puzzleProgress"

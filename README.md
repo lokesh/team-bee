@@ -5,8 +5,8 @@
 - [ ] Move in Admin
 
 - [x] Bug: double clicking on buttons
-- [ ] Bug: Missing UI buttons on desktop, see Figma images
-- [ ] PRevent zoom on mobile (see Letterwalk)
+- [x] Bug: Missing UI buttons on desktop, see Figma images
+- [x] PRevent zoom on mobile (see Letterwalk)
 
 
 
