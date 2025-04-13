@@ -16,7 +16,6 @@ const routes = [
     component: GameView,
     beforeEnter: (to, from) => {
       const store = useStore()
-      console.log('beforeEnter', store.userId)
       if (!store.userId) {
         return { name: 'Login' }
       }
@@ -26,12 +25,6 @@ const routes = [
     path: '/debug',
     name: 'Debug',
     component: DebugView,
-    beforeEnter: (to, from) => {
-      const store = useStore()
-      if (!store.userId) {
-        return { name: 'Login' }
-      }
-    },
   },
 ]
 
