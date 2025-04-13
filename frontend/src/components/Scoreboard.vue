@@ -37,10 +37,10 @@
         </template>
       </div>
       <div
-        v-if="false"
+        v-if="false"  
         class="msg-max"
       >
-        {{ puzzle.answers.length }} words and {{ possiblePoints }} pts available
+        {{ puzzle.answers.length }} words and {{ possiblePoints }} pts max
       </div>
 
       <genius-bar
@@ -174,7 +174,7 @@ const userName = computed(() => users.value[userId.value].name)
 
 // Methods
 const closeModal = () => {
-  store.commit('closeModal')
+  store.closeModal();
 }
 
 const getTagClasses = (currentUser, allUsers, usersWithTags) => {
@@ -233,6 +233,7 @@ const hintCheck = (word) => {
 }
 
 .msg-max {
+  line-height: 1;
   margin-bottom: calc(var(--gutter) / 2);
   color: var(--color-secondary);
 }
