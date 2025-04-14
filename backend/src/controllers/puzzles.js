@@ -71,6 +71,7 @@ export const createPuzzle = async (req, res) => {
 
   const values = `'${date}', '${center_letter}', '{${outer_letters}}', '{${answers}}'`;
   try {
+    console.log('Creating puzzle with values:', values);
     const data = await model.create(columns, values);
     res.status(200).json(data.rows);
   } catch (err) {

@@ -14,7 +14,7 @@ const app = express();
 // Enable CORS for development
 if (process.env.NODE_ENV !== 'production') {
   app.use(cors({
-    origin: 'http://localhost:5173', // Vue's default dev server port
+    origin: process.env.ALLOWED_ORIGINS,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
